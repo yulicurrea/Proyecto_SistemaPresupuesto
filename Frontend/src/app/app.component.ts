@@ -19,17 +19,19 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
+      id:['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido:['', Validators.required],
       clave: ['', Validators.required],
       edad: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
-      nombre: ['', Validators.required],
-      rol: ['', Validators.required],
+      rol: ['', Validators.required]
+		  
     })
   }
 
   guardar(): void {
     this.usuarioService.saveUser(this.usuarioForm.value).subscribe(resp => {
-
     },
       error => { console.error(error) }
 
