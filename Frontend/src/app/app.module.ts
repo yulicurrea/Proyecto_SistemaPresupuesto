@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { PasswordValidationDirective } from './validations/password-validation.directive';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PasswordValidationDirective
   ],
   imports: [
     BrowserModule,
