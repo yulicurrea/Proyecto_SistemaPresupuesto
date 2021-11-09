@@ -14,10 +14,10 @@ export class UsuariosService {
     public GetallUsuarios(){
       return this.httpClient.get(this.API_SERVER);
     }
-    public guardar(usuario:any): Observable<any>{
+    public guardar(usuario: any): Observable<any>{
       return this.httpClient.post(this.API_SERVER,usuario);
     }
-    public eliminarPersona(id: any): Observable<any>{
-      return this.httpClient.delete(this.API_SERVER+ "delete/"+id);
+    public eliminarPersona(id: string): Observable<any>{
+      return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
     }
 }

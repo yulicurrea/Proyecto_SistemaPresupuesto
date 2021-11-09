@@ -23,14 +23,13 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
       id: ['', Validators.required],
-      clave : ['', Validators.required],
       edad : ['', Validators.required],
       fechaNacimiento :['', Validators.required],
       nombre :['', Validators.required],
       apellido : ['', Validators.required],
       rol : ['', Validators.required],
-      usuario: ['', Validators.required],
-      
+      usuario: ['', [Validators.required, Validators.maxLength(8)]],
+      clave : ['', [Validators.required,Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,8}$/)]]
       });;
 
       this.usuarioService.GetallUsuarios().subscribe(resp => {
@@ -71,4 +70,6 @@ export class AppComponent implements OnInit{
     })
 
   }
+  
+
 }
