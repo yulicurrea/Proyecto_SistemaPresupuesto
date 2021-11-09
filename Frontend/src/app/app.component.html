@@ -23,6 +23,10 @@
     <input type="date" formControlName="fechaNacimiento" class="form-control">
   </div>
   <div class="form-group">
+    <label>Usuario</label>
+    <input type="text" formControlName="usuario" class="form-control">
+  </div>
+  <div class="form-group">
     <label>Clave</label>
     <input type="password" formControlName="clave" class="form-control">
   </div>
@@ -46,18 +50,21 @@
         <th>CEDULA</th>
         <th>EDAD</th>
         <th>FECHA NACIMIENTO</th>
+        <th>USUARIO</th>
         <th>CLAVE</th>
         <th>ROL</th>
+
         <th>OPTICIONES</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of  usuario">
+      <tr *ngFor="let item of  usuar">
         <td>{{item.nombre}}</td>
         <td>{{item.apellido}}</td>
         <td>{{item.id}}</td>
         <td>{{item.edad}}</td>
         <td>{{item.fechaNacimiento}}</td>
+        <td>{{item.usuario}}</td>
         <td>{{item.clave}}</td>
         <td>{{item.rol}}</td>
         <td>

@@ -11,7 +11,7 @@ export class AppComponent implements OnInit{
 
   
   usuarioForm!: FormGroup;
-  usuario:any;
+  usuar:any;
   
   
   constructor(
@@ -29,10 +29,12 @@ export class AppComponent implements OnInit{
       nombre :['', Validators.required],
       apellido : ['', Validators.required],
       rol : ['', Validators.required],
+      usuario: ['', Validators.required],
+      
       });;
 
       this.usuarioService.GetallUsuarios().subscribe(resp => {
-        this.usuario=resp;
+        this.usuar=resp;
         },
           error => { console.error(error) }
         );
@@ -43,8 +45,8 @@ export class AppComponent implements OnInit{
   guardar(): void {
     this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
     this.usuarioForm.reset();
-    this.usuario=this.usuario.filter((usuario: { id: any; })=>resp.id==usuario.id);
-    this.usuario.push(resp);
+    this.usuar=this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
+    this.usuar.push(resp);
     },
       error => { console.error(error) }
     );
@@ -52,19 +54,20 @@ export class AppComponent implements OnInit{
   eliminar(usuario: any){
     this.usuarioService.eliminarPersona(usuario.id).subscribe(resp=>{
       if(resp===true){
-        this.usuario.pop(usuario);
+        this.usuar.pop(usuario);
       }
     })
   }
-  editar(usuario:any){
+  editar(usuarios:any){
     this.usuarioForm.setValue({
-      id: usuario.id ,
-      clave :usuario.clave  ,
-      edad : usuario.edad,
-      fechaNacimiento :usuario.fechaNacimiento ,
-      nombre :usuario.nombre ,
-      apellido : usuario.apellido ,
-      rol :usuario.rol ,
+      id: usuarios.id ,
+      clave :usuarios.clave  ,
+      edad : usuarios.edad,
+      fechaNacimiento :usuarios.fechaNacimiento ,
+      nombre :usuarios.nombre ,
+      apellido : usuarios.apellido ,
+      rol :usuarios.rol ,
+      usuario :usuarios.usuario 
     })
 
   }
