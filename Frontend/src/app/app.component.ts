@@ -11,6 +11,7 @@ export class AppComponent implements OnInit{
 
   
   usuarioForm!: FormGroup;
+  usurio:any;
   
   
   constructor(
@@ -21,10 +22,12 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
+      id: ['', Validators.required],
       clave : ['', Validators.required],
       edad : ['', Validators.required],
       fechaNacimiento :['', Validators.required],
       nombre :['', Validators.required],
+      apellido : ['', Validators.required],
       rol : ['', Validators.required],
       });;
   }
