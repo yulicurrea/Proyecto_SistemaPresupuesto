@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido:['', Validators.required],
       clave: ['', [Validators.required,Validators.maxLength(8)]],
-      edad: ['', Validators.required],
+      edad: ['', [Validators.required],Validators.min(16)],
       fechaNacimiento: ['', Validators.required],
       rol: ['', Validators.required],
 		  usuario: ['', Validators.required]
