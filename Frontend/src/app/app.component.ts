@@ -8,6 +8,9 @@ import { UsuariosService } from './services/usuario/usuarios.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
 
   
   usuarioForm!: FormGroup;
