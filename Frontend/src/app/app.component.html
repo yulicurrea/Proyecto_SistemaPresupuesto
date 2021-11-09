@@ -1,31 +1,35 @@
 <div class="Formulario">
-  <h2>Crear Usuario</h2>
-  <form [formGroup]="usuarioForm"(ngSubmit)="guardar()">
-    <div class="form-group">
-      <label>Clave</label>
-      <input type="password"formControlName="clave"class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Edad</label>
-      <input type="number"formControlName="edad"class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Fecha de Nacimiento</label>
-      <input type="date"formControlName="fechaNacimiento"class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Nombre</label>
-      <input type="text"formControlName="nombre"class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Rol</label>
-      <input type="text"formControlName="rol"class="form-control">
-    </div>
-  <button type="submit"class="btn btn-danger">Guardar</button>
+  <h2>Usuarios registrados</h2>
+>>>>>>> Stashed changes
 
-  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>CEDULA</th>
+        <th>EDAD</th>
+        <th>FECHA NACIMIENTO</th>
+        <th>CLAVE</th>
+        <th>ROL</th>
+        <th>OPTICIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr *ngFor = "let item of usuario">
+      <td>{{item.nombre}}</td>
+      <td>{{item.apellido}}</td>
+      <td>{{item.id}}</td>
+      <td>{{item.edad}}</td>
+      <td>{{item.fechaNacimiento}}</td>
+      <td>{{item.clave}}</td>
+      <td>{{item.rol}}</td>
+      <td>
+        <button type="button"class="btn btn-success"(click)="editar(item)">Editar</button>
+        <button type="button"class="btn btn-danger"(click)="eliminar(item)">Eliminar</button>
+      </td>
+     </tr>
+    </tbody>
+  </table>
 </div>
- 
-
-
 <router-outlet></router-outlet>
