@@ -14,7 +14,7 @@ export class UsuariosService {
     public GetallUsuarios(){
       return this.httpClient.get(this.API_SERVER);
     }
-    public saveUsuario (user:any): Observable<any>{
+    public guardar(user:any): Observable<any>{
       return this.httpClient.post(this.API_SERVER,user);
     }
 }
