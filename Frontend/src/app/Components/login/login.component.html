@@ -1,14 +1,19 @@
-<head>
-    <meta charset="utf-8">
-    <title>Formulario Login</title>
-    <link rel="stylesheet" href="login.component.css">
-  </head>
-  <body>
-    <h5>Formulario Login</h5>
-    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
-      <input class="form-control" type="text" formControlName="usuario" value="" placeholder="Usuario">
-      <input class="form-control" type="password" formControlName="contrasena" value="" placeholder="Contraseña">
-      <input class="buttons" type="submit" name="" value="Ingresar">
-    </form>
-  </body>
-  <router-outlet></router-outlet>
+<div class="body">
+  <div class="login">
+    <h2>Inicio de sesión</h2>
+      <img [src]="logo" alt="" width="50%" height="80%">
+      <form [formGroup]="loginForm" (ngSubmit)="inicioSesion()"></form>
+      <label>Usuario</label>
+    <input type="text" formControlName="usuario" class="form-control">
+    <div class="errors" *ngIf="loginForm.get('usuario').invalid && (loginForm.get('usuario').touched || loginForm.get('nombre').dirty)">
+      <div *ngIf="loginForm.get('usuario').hasError('required')">
+        Ingrese su usuario 
+    </div>
+  </div>
+  </div>
+  <div class="form-group">
+    <label>Clave</label>
+    <input type="password" formControlName="clave" class="form-control">
+  </div>
+  <button type="submit"class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Seision</button>
+</div>
