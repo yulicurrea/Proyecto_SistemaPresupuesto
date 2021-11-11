@@ -23,7 +23,6 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
       id: ['', Validators.required],
-      edad : ['', Validators.required],
       fechaNacimiento :['', Validators.required],
       nombre :['', Validators.required],
       apellido : ['', Validators.required],
@@ -61,7 +60,6 @@ export class AppComponent implements OnInit{
     this.usuarioForm.setValue({
       id: usuarios.id ,
       clave :usuarios.clave  ,
-      edad : usuarios.edad,
       fechaNacimiento :usuarios.fechaNacimiento ,
       nombre :usuarios.nombre ,
       apellido : usuarios.apellido ,
