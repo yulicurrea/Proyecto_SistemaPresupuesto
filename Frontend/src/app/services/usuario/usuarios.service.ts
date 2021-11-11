@@ -7,17 +7,17 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class UsuariosService {
-  saveUsuario(value: any) {
-    throw new Error('Method not implemented.');
-  }
-  private API_SERVER = "http:localhost:8080/api/user/";
+  private API_SERVER = "http://localhost:8080/api/user/";
 
   constructor(private httpClient: HttpClient ) { }
 
     public GetallUsuarios(){
       return this.httpClient.get(this.API_SERVER);
     }
-    public guardar(user:any): Observable<any>{
-      return this.httpClient.post(this.API_SERVER,user);
+    public guardar(usuario: any): Observable<any>{
+      return this.httpClient.post(this.API_SERVER,usuario);
+    }
+    public eliminarPersona(id: string): Observable<any>{
+      return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
     }
 }

@@ -1,44 +1,94 @@
-<div class="formularioRegistro">
-  <h2>Crear Usuario</h2>
+<div class="Formulario">
+  <h2>Registro Usuarios</h2>
+
   <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
-    <div class="form-group">
-      <label>Nombre</label>
-      <input type="text" formControlName="nombre" class="form-control">
+  <div class="form-group">
+    <label>Nombre</label>
+    <input type="text" formControlName="nombre" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('nombre').invalid && (usuarioForm.get('nombre').touched || usuarioForm.get('nombre').dirty)">
+      <div *ngIf="usuarioForm.get('nombre').hasError('required')">
+        Ingrese su nombre completo
     </div>
-    <div class="form-group">
-      <label>Apellido</label>
-      <input type="text" formControlName="apellido" class="form-control">
+  </div>
+  </div>
+  <div class="form-group">
+    <label>Apellido</label>
+    <input type="text" formControlName="apellido" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('apellido').invalid && (usuarioForm.get('apellido').touched || usuarioForm.get('apellido').dirty)">
+      <div *ngIf="usuarioForm.get('apellido').hasError('required')">
+        Ingrese su apellido completo
     </div>
-    <div class="form-group">
-      <label>Cedula</label>
-      <input type="text" formControlName="id" class="form-control">
+  </div>
+  </div>
+  <div class="form-group">
+    <label>Cedula</label>
+    <input type="number" formControlName="id" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('id').invalid && (usuarioForm.get('id').touched || usuarioForm.get('id').dirty)">
+      <div *ngIf="usuarioForm.get('id').hasError('required')">
+        Ingrese su Cedula
     </div>
-    <div class="form-group">
-      <label>Edad</label>
-      <input type="text" formControlName="edad" class="form-control">
+  </div>
+  </div>
+  <div class="form-group">
+    <label>Fecha Nacimiento</label>
+    <input type="date" id="fechaNacimiento" min="1900-01-01" max="2003-12-31" formControlName="fechaNacimiento" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Usuario</label>
+    <input type="text" formControlName="usuario" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Clave</label>
+    <input type="password" formControlName="clave" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Rol</label>
+    <input type="text" formControlName="rol" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('rol').invalid && (usuarioForm.get('rol').touched || usuarioForm.get('rol').dirty)">
+      <div *ngIf="usuarioForm.get('rol').hasError('required')">
+        Por favor ingrese un rol
     </div>
-    <div class="form-group">
-      <label>Fecha Nacimiento</label>
-      <input type="date" formControlName="fechaNacimiento" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Usuario</label>
-      <input type="text" formControlName="usuario" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Clave</label>
-      <input type="password" formControlName="clave" class="form-control">
-    </div>
-    
-    <div class="form-group">
-      <label>Rol</label>
-      <input type="text" formControlName="rol" class="form-control">
-    </div>
-   
+  </div>
+  </div>
+<br/>
+<button type="submit"class="btn btn-primary" [disabled]="usuarioForm.invalid">Guardar</button>
 
+</form>
+</div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="usuarioForm.invalid">Guardar</button>
+  <div class="Formulario">
+  <h2>Usuarios registrados</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>CEDULA</th>
+        <th>USUARIO</th>
+        <th>ROL</th>
 
-  </form>
+        <th>OPCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of  usuar">
+        <td>{{item.nombre}}</td>
+        <td>{{item.apellido}}</td>
+        <td>{{item.id}}</td>
+        <td>{{item.usuario}}</td>
+        <td>{{item.rol}}</td>
+          <td>
+            <form (ngSubmit)="editar(item)">
+              <button type="submit" class="btn btn-success" >Editar</button>
+            </form>
+            <form (ngSubmit)="eliminar(item)">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </td>
+        
+       
+      </tr>
+    </tbody>
+  </table>
 </div>
 <router-outlet></router-outlet>
