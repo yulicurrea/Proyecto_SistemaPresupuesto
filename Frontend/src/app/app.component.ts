@@ -36,29 +36,31 @@ export class AppComponent implements OnInit{
       clave : ['', [Validators.required,Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,8}$/)]]
       });;
 
-      this.usuarioService.GetallUsuarios().subscribe(resp => {
-        this.usuar=resp;
-        },
-          error => { console.error(error) }
-        );
+     this.getAllUser();
       
   }
  
-
+  getAllUser():void{
+    this.usuarioService.GetallUsuarios().subscribe(resp => {
+      this.usuar=resp;
+      },
+        error => { console.error(error) }
+      );
+  }
   guardar(): void {
     this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
     this.usuarioForm.reset();
     this.usuar = this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
     this.usuar.push(resp);
-    
+    window.location.reload();
     },
       error => { console.error(error) }
     );
   }
   eliminar(usuario: any){
+    window.location.reload();
     this.usuarioService.eliminarPersona(usuario.id).subscribe(resp=>{
       if(resp===true){
-        location.reload();
         this.usuar.pop(usuario);
         
       }
