@@ -1,0 +1,35 @@
+<div class="Formulario">
+  <h2>Usuarios registrados</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>CEDULA</th>
+        <th>USUARIO</th>
+        <th>ROL</th>
+
+        <th>OPCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of  usuarios">
+        <td>{{item.nombre}}</td>
+        <td>{{item.apellido}}</td>
+        <td>{{item.cedula}}</td>
+        <td>{{item.usuario}}</td>
+        <td>{{item.rol}}</td>
+        <td>
+          <form>
+            <button type="submit" class="btn btn-success">Editar</button>
+          </form>
+          <form>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>
