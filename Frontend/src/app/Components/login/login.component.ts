@@ -1,6 +1,7 @@
-import { Component , OnInit} from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 @Component({
   selector: 'app-login',
@@ -10,10 +11,13 @@ import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 export class LoginComponent implements OnInit {
 
   loginForm!:FormGroup;
+  cargando = false;
   login:any;
   
   constructor(public fb: FormBuilder,
-    public usuarioService: UsuariosService
+    public usuarioService: UsuariosService,
+    private router: Router,
+    private _snackBar: MatSnackBar
     ) { 
 
     }
@@ -28,9 +32,29 @@ export class LoginComponent implements OnInit {
   iniciarSesion():void{
     this.usuarioService.login(this.loginForm.value).subscribe(resp =>{
       if(resp===true){
-        console.log("Inicio sesion correctamente");
+        this.carga();
+        this.router.navigate(['usuario']);
+      }else {
+        this.error()
       }
     })
   }
+  
+  error() {
+    this._snackBar.open('Usuario o contraseña ingresados son invalidos.', '', {
 
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+
+    });
+  }
+  carga() {
+    this.cargando = true;
+    setTimeout(() => {
+
+      this.cargando = false;
+
+    }, 1500);
+  }
 }
