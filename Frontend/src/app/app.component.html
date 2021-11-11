@@ -5,18 +5,33 @@
   <div class="form-group">
     <label>Nombre</label>
     <input type="text" formControlName="nombre" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('nombre').invalid && (usuarioForm.get('nombre').touched || usuarioForm.get('nombre').dirty)">
+      <div *ngIf="usuarioForm.get('nombre').hasError('required')">
+        Ingrese su nombre completo
+    </div>
+  </div>
   </div>
   <div class="form-group">
     <label>Apellido</label>
     <input type="text" formControlName="apellido" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('apellido').invalid && (usuarioForm.get('apellido').touched || usuarioForm.get('apellido').dirty)">
+      <div *ngIf="usuarioForm.get('apellido').hasError('required')">
+        Ingrese su apellido completo
+    </div>
+  </div>
   </div>
   <div class="form-group">
     <label>Cedula</label>
     <input type="number" formControlName="id" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('id').invalid && (usuarioForm.get('id').touched || usuarioForm.get('id').dirty)">
+      <div *ngIf="usuarioForm.get('id').hasError('required')">
+        Ingrese su Cedula
+    </div>
+  </div>
   </div>
   <div class="form-group">
     <label>Fecha Nacimiento</label>
-    <input type="date" id="fechaNacimiento" min="1900-01-01" max="2021-12-31" formControlName="fechaNacimiento" class="form-control">
+    <input type="date" id="fechaNacimiento" min="1900-01-01" max="2003-12-31" formControlName="fechaNacimiento" class="form-control">
   </div>
   <div class="form-group">
     <label>Usuario</label>
@@ -29,8 +44,13 @@
   <div class="form-group">
     <label>Rol</label>
     <input type="text" formControlName="rol" class="form-control">
+    <div class="errors" *ngIf="usuarioForm.get('rol').invalid && (usuarioForm.get('rol').touched || usuarioForm.get('rol').dirty)">
+      <div *ngIf="usuarioForm.get('rol').hasError('required')">
+        Por favor ingrese un rol
+    </div>
   </div>
-
+  </div>
+<br/>
 <button type="submit"class="btn btn-primary" [disabled]="usuarioForm.invalid">Guardar</button>
 
 </form>
