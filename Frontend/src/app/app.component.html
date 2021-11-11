@@ -17,6 +17,7 @@
   <div class="form-group">
     <label>Fecha Nacimiento</label>
     <input type="date" id="fechaNacimiento" min="1900-01-01" max="2021-12-31" formControlName="fechaNacimiento" class="form-control" required >
+
   </div>
   <div class="form-group "name="myForm">
     <label>Usuario</label>
@@ -48,7 +49,7 @@
         <th>USUARIO</th>
         <th>ROL</th>
 
-        <th>OPTICIONES</th>
+        <th>OPCIONES</th>
       </tr>
     </thead>
     <tbody>
@@ -58,10 +59,16 @@
         <td>{{item.id}}</td>
         <td>{{item.usuario}}</td>
         <td>{{item.rol}}</td>
-        <td>
-          <button type="button" class="btn btn-success" (click)="editar(item)">Editar</button>
-          <button type="button" class="btn btn-danger" (click)="eliminar(item)">Eliminar</button>
-        </td>
+          <td>
+            <form (ngSubmit)="editar(item)">
+              <button type="submit" class="btn btn-success" >Editar</button>
+            </form>
+            <form (ngSubmit)="eliminar(item)">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </td>
+        
+       
       </tr>
     </tbody>
   </table>
