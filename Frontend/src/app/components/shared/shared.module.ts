@@ -9,8 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatTableModule} from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -31,7 +32,8 @@ import {MatTableModule} from '@angular/material/table';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule
   ],
   exports: [
     MatSliderModule,
@@ -47,6 +49,8 @@ import {MatTableModule} from '@angular/material/table';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule]
+    HttpClientModule,
+    MatTooltipModule
+  ]
 })
 export class SharedModule { }
