@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Gestion de usuarios</span>
+    <span class="example-spacer"></span>
+    <button mat-button routerLink='/sistemapresupuesto/nuevousuario'>Agregar usuario</button>
+  </mat-toolbar>
+  <table mat-table [dataSource]="usuarios" class="mat-elevation-z8 demo-table">
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef> APELLIDO </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> CEDULA </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef> USUARIO </th>
+      <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+    </ng-container>
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef> ROL </th>
+      <td mat-cell *matCellDef="let element"> {{element.rol}} </td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;">
+
+        <a class="pointer" style="color:#1f516f" (click) ="eliminar(element)" matTooltip="Editar usuario">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <a class="pointer" (click) ="eliminar(element)" style="color:#e15639" matTooltip="Eliminar usuario">
+          <mat-icon>delete</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
