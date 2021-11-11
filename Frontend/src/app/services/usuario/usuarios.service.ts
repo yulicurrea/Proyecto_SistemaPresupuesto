@@ -20,4 +20,7 @@ export class UsuariosService {
     public eliminarPersona(id: string): Observable<any>{
       return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
     }
+    public login(usuario:any){
+      return this.httpClient.post(this.API_SERVER + "login/", usuario);
+    }
 }

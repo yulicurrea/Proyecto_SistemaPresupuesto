@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Formulario Login</title>
     <link rel="stylesheet" href="login.component.css">
   </head>
   <body>
-    <section class="form-login">
-      <h5>Formulario Login</h5>
-      <input class="controls" type="text" name="usuario" value="" placeholder="Usuario">
-      <input class="controls" type="password" name="contrasena" value="" placeholder="Contraseña">
+    <h5>Formulario Login</h5>
+    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+      <input class="form-control" type="text" formControlName="usuario" value="" placeholder="Usuario">
+      <input class="form-control" type="password" formControlName="contrasena" value="" placeholder="Contraseña">
       <input class="buttons" type="submit" name="" value="Ingresar">
-      <p><a href="#">¿Olvidaste tu Contraseña?</a></p>
-
-    </section>
-
+    </form>
   </body>
-</html>
+  <router-outlet></router-outlet>
