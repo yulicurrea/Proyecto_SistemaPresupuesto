@@ -5,7 +5,7 @@
       <tr>
         <th>NOMBRE</th>
         <th>APELLIDO</th>
-        <th>CEDULA</th>
+        <th>FECHA DE NACIMIENTO</th>
         <th>USUARIO</th>
         <th>ROL</th>
 
@@ -16,7 +16,7 @@
       <tr *ngFor="let item of  usuarios">
         <td>{{item.nombre}}</td>
         <td>{{item.apellido}}</td>
-        <td>{{item.cedula}}</td>
+        <td>{{item.fechaNacimiento | date:'d/M/yyyy'}}</td>
         <td>{{item.usuario}}</td>
         <td>{{item.rol}}</td>
         <td>

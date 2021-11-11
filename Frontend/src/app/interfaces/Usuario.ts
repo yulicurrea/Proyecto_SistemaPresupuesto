@@ -1,7 +1,7 @@
 export interface Usuario{
     nombre:String,
     apellido:String,
-    cedula:string,
+    fechaNacimiento:string,
     usuario:string
     rol: string
 }

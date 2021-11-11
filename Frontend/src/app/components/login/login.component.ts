@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   cargando = false;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
+  constructor(
+    private authService:AuthenticationService,
+    private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
     this.form = this.fb.group({
       usuario: ['', Validators.required],
       contraseña: ['', Validators.required]
@@ -21,13 +24,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ingresar() {
-    console.log(this.form);
+  ingresar() {    
     const usuario = this.form.value.usuario;
     const contraseña = this.form.value.contraseña;
-    if (usuario == 'admin' && contraseña == 'admin') {
-      this.carga();
-      this.router.navigate(['sistemapresupuesto']);
+    if (usuario && contraseña) {
+      this.loginBack(usuario,contraseña);
+      //this.carga();
+      
     } else {
       this.error();
       this.form.reset();
@@ -49,5 +52,23 @@ export class LoginComponent implements OnInit {
       this.cargando = false;
 
     }, 1500);
+  }
+
+  loginBack(usuario:string, clave:string){
+    //Invocar servicio login
+    
+    this.authService.login(usuario, clave).subscribe(
+      resp=>{
+        if(resp.token){
+          localStorage.setItem("TOKEN", resp.token);
+
+          this.router.navigate(["/sistemapresupuesto"])
+        }
+      }
+
+    );
+    
+    
+    
   }
 }
