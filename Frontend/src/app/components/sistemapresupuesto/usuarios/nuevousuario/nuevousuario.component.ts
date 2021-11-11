@@ -2,26 +2,29 @@ import { Component , OnInit} from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-reportes',
-  templateUrl: './reportes.component.html',
-  styleUrls: ['./reportes.component.css']
+  templateUrl: './nuevousuario.component.html',
+  styleUrls: ['./nuevousuario.component.css']
 })
-export class ReportesComponent implements OnInit {
+export class NuevoUsuarioComponent implements OnInit {
 
   title(title: any) {
     throw new Error('Method not implemented.');
   }
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'cedula', 'usuario','rol'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'id', 'usuario','rol'];
   usuarioForm!: FormGroup;
   usuar:any;
-  
+  minDate = new Date(1990, 0, 1);
+  maxDate = new Date(2020,0,1);
   
   constructor(
     public fb: FormBuilder,
     public usuarioService: UsuariosService,
-    public location: Location
+    public location: Location,
+    private _snackBar: MatSnackBar
   ){
 
   }
@@ -53,8 +56,18 @@ export class ReportesComponent implements OnInit {
     this.usuar = this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
     this.usuar.push(resp);
     window.location.reload();
+    this.completo();
     },
-      error => { console.error(error) }
+      
     );
+  }
+  completo() {
+    this._snackBar.open('Usuario guardado', '', {
+
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+
+    });
   }
 }

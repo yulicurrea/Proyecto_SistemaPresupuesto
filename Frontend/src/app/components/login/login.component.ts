@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +12,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   cargando = false;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router,public _usuarioServices: UsuariosService) {
     this.form = this.fb.group({
       usuario: ['', Validators.required],
-      contraseña: ['', Validators.required]
+      clave: ['', Validators.required]
     })
   }
 
@@ -22,16 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar() {
-    console.log(this.form);
-    const usuario = this.form.value.usuario;
-    const contraseña = this.form.value.contraseña;
-    if (usuario == 'admin' && contraseña == 'admin') {
-      this.carga();
-      this.router.navigate(['sistemapresupuesto']);
-    } else {
-      this.error();
-      this.form.reset();
-    }
+    this._usuarioServices.login(this.form.value).subscribe(resp =>{
+      if(resp===true){
+        this.carga();
+        this.router.navigate(['sistemapresupuesto']);
+      }else {
+        this.error()
+      }
+    })
   }
   error() {
     this._snackBar.open('Usuario o contraseña ingresados son invalidos.', '', {

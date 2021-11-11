@@ -7,6 +7,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     InicioComponent,
     NavbarComponent,
     ReportesComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    NuevoUsuarioComponent
   ],
   imports: [
     CommonModule,
