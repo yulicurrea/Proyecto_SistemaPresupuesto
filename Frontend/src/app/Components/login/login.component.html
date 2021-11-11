@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Formulario Login</title>
-    <link rel="stylesheet" href="login.component.css">
-  </head>
-  <body>
-    <section class="form-login">
-      <h5>Formulario Login</h5>
-      <input class="controls" type="text" name="usuario" value="" placeholder="Usuario">
-      <input class="controls" type="password" name="contrasena" value="" placeholder="Contraseña">
-      <input class="buttons" type="submit" name="" value="Ingresar">
-      <p><a href="#">¿Olvidaste tu Contraseña?</a></p>
+<div class="body">
 
-    </section>
-
-  </body>
-</html>
+    <div class="login">
+        <mat-spinner class="spinner" *ngIf ="cargando" diameter="50"></mat-spinner>
+        <form *ngIf ="!cargando" [formGroup]="form" (ngSubmit)="ingresar()">
+            <img src="./assets/img/usuario.png" width="50%">
+            <h1>Inicio Sesión</h1>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Usuario</mat-label>
+                <input type="text" matInput autocomplete="off" formControlName="usuario">
+            </mat-form-field>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput autocomplete="off" formControlName="clave">
+            </mat-form-field>
+            <br>
+            <button type="submit" mat-raised-button class="ancho button" color="primary" [disabled]="form.invalid">Ingresar</button>
+        </form>
+    </div>
+</div>
