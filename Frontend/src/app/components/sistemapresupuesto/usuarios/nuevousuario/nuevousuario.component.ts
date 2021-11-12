@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component , OnInit} from '@angular/core';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Usuario } from 'src/app/interfaces/Usuario';
 @Component({
   selector: 'app-reportes',
   templateUrl: './nuevousuario.component.html',
@@ -14,80 +16,110 @@ export class NuevoUsuarioComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'id', 'usuario', 'rol'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'id', 'usuario','rol'];
   usuarioForm!: FormGroup;
-  usuar: any;
+  usuar:any;
+
+  usuario:Usuario = new Usuario();
   minDate = new Date(1990, 0, 1);
-  maxDate = new Date(2020, 0, 1);
+  maxDate = new Date(2020,0,1);
+  
+  roles:string[] = ["ADMIN","USER"];
+
+  editarId:any = "";
 
   constructor(
     public fb: FormBuilder,
     public usuarioService: UsuariosService,
     public location: Location,
-    private _snackBar: MatSnackBar
-  ) {
+    private _snackBar: MatSnackBar,
+    private route:ActivatedRoute
+  ){
 
+    this.editarId = this.route.snapshot.paramMap.get('id');    
   }
   ngOnInit(): void {
-    this.usuarioForm = this.fb.group({
-      id: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      rol: ['', Validators.required],
-      usuario: ['', [Validators.required, Validators.maxLength(8)]],
-      clave: ['', [Validators.required, Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,8}$/)]]
-    });;
+   this.cargarFormulario();
 
-    this.getAllUser();
+    
+     // this.getAllUser();
 
+     if(this.editarId){
+       this.cargarUsuario();
+     }
+      
   }
 
-  getAllUser(): void {
-    this.usuarioService.GetallUsuarios().subscribe(resp => {
-      this.usuar = resp;
-    },
-      error => { error() }
+  cargarFormulario(){
+    let fecha = "";    
+
+    if(this.usuario && this.usuario.fechaNacimiento){
+      fecha = this.usuario.fechaNacimiento.split('T')[0];     
+    }
+
+    this.usuarioForm = this.fb.group({
+      id: [this.usuario.id, Validators.required],
+      fechaNacimiento :[fecha, Validators.required],
+      nombre :[this.usuario.nombre, Validators.required],
+      apellido : [this.usuario.apellido, Validators.required],
+      rol : [this.usuario.rol, Validators.required],
+      usuario: [this.usuario.usuario, [Validators.required, Validators.maxLength(8)]],
+      clave : ['', [Validators.required,Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,8}$/)]]
+      });;
+  }
+
+  cargarUsuario(){
+    this.usuarioService.getUsuario(this.editarId).subscribe(
+      (resp: Usuario)=>{
+        this.usuario = resp;
+        this.cargarFormulario();
+      },
+      (      _error: any)=>{//opcional
+        //Manejo del error
+        //Notificar("No se pudo guardar")
+      }
     );
+
+  }
+  
+ 
+  getAllUser():void{
+    this.usuarioService.GetallUsuarios().subscribe(resp => {
+      this.usuar=resp;
+      },
+        error => { console.error(error) }
+      );
   }
   guardar(): void {
-        this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
-        this.usuarioForm.reset();
-        this.usuar = this.usuar.filter((usuario: { id: any; }) => resp.id == usuario.id);
-        this.usuar.push(resp);
-        this.completo();
+    this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
+    this.usuarioForm.reset();
+    this.usuar = this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
+    this.usuar.push(resp);
+    this.completo();
     },
+
     error => { error() }
+      
     );
   }
+  completo() {
+    this._snackBar.open('Usuario guardado', '', {
 
-  validar(usuario:any): boolean{
-    let aux = false;
-    this.usuarioService.validar(this.usuarioForm.value).subscribe(resp => {
-      if(resp === true){
-        aux = true;
-      }
-    },
-    error => { error() }
-    );
-    return aux;
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+
+    });
   }
-completo() {
-  this._snackBar.open('Usuario guardado', '', {
 
-    duration: 5000,
-    horizontalPosition: 'center',
-    verticalPosition: 'bottom'
+  error() {
+    this._snackBar.open('Usuario ya existe', '', {
+  
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+  
+    });
+  }
 
-  });
-}
-error() {
-  this._snackBar.open('Usuario ya existe', '', {
-
-    duration: 5000,
-    horizontalPosition: 'center',
-    verticalPosition: 'bottom'
-
-  });
-}
 }
