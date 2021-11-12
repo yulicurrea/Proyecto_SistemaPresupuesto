@@ -51,15 +51,11 @@ export class NuevoUsuarioComponent implements OnInit {
     );
   }
   guardar(): void {
-    this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
-      if(this.validar(this.usuarioForm.value) == false){
+        this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
         this.usuarioForm.reset();
         this.usuar = this.usuar.filter((usuario: { id: any; }) => resp.id == usuario.id);
         this.usuar.push(resp);
         this.completo();
-      }else{
-        this.error();
-      }
     },
     error => { error() }
     );
