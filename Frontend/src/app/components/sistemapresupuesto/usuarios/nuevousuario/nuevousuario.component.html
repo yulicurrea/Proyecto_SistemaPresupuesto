@@ -80,6 +80,10 @@
             <input matInput formControlName="fechaNacimiento" class="form-control" required [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+            *ngIf="usuarioForm.get('fechaNacimiento').invalid && (usuarioForm.get('fechaNacimiento').touched || usuarioForm.get('fechaNacimiento').dirty)">
+            Ingrese su fecha de nacimiento</mat-error>
+        
           </mat-form-field>
         </div>
       </div>

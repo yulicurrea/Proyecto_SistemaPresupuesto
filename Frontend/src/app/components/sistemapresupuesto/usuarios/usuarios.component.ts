@@ -31,11 +31,12 @@ export class UsuariosComponent implements OnInit {
       })
   }
   eliminar(usuario: any){
+    this.completo();
+    window.location.reload();
     this._usuarioServices.eliminarPersona(usuario.id).subscribe(resp=>{
       if(resp===true){
         this.usuarios.pop();
-        this.completo();
-        window.location.reload();
+        
       }
     })
   }
