@@ -5,4 +5,5 @@ export class Usuario{
     usuario:string;
     rol: string;
     fechaNacimiento:string;
+    
 }
