@@ -29,4 +29,7 @@ export class UsuariosService {
     public login(usuario:any){
       return this.httpClient.post(this.API_SERVER + "login/", usuario);
     }
+    public validar(usuario:any){
+      return this.httpClient.post(this.API_SERVER + "validar/", usuario);
+    }
 }

@@ -8,6 +8,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.component';
+import { EditarusuarioComponent } from './usuarios/editarusuario/editarusuario.component';
+import { EditusuarioComponent } from './usuarios/nuevousuario/editusuario/editusuario.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.comp
     NavbarComponent,
     ReportesComponent,
     UsuariosComponent,
-    NuevoUsuarioComponent
+    NuevoUsuarioComponent,
+    EditarusuarioComponent,
+    EditusuarioComponent
   ],
   imports: [
     CommonModule,
