@@ -79,13 +79,24 @@
            
           </div>
         </div>
+
         <div class="form-group">
-          <label>Fecha Nacimiento</label>
-          <input type="date" id="fechaNacimiento" min="1900-01-01" max="2003-12-31" formControlName="fechaNacimiento" class="form-control">
+          <div class="errors">
+            <mat-form-field class="ancho" appearance="fill">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput formControlName="fechaNacimiento" class="form-control" required [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error
+              *ngIf="usuarioForm.get('fechaNacimiento').invalid && (usuarioForm.get('fechaNacimiento').touched || usuarioForm.get('fechaNacimiento').dirty)">
+              Ingrese su fecha de nacimiento</mat-error>
+  
+            </mat-form-field>
+          </div>
         </div>
     
         <br />
-        <button type="submit" class="btn btn-primary" [disabled]="usuarioForm.invalid">Guardar</button>
+        <button type="submit" mat-raised-button class="ancho button" color="primary" [disabled]="usuarioForm.invalid">Guardar Usuario</button>
   
   
       </div>

@@ -95,9 +95,10 @@ export class NuevoUsuarioComponent implements OnInit {
     this.usuarioForm.reset();
     this.usuar = this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
     this.usuar.push(resp);
-    window.location.reload();
     this.completo();
     },
+
+    error => { error() }
       
     );
   }
@@ -110,4 +111,15 @@ export class NuevoUsuarioComponent implements OnInit {
 
     });
   }
+
+  error() {
+    this._snackBar.open('Usuario ya existe', '', {
+  
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+  
+    });
+  }
+
 }
