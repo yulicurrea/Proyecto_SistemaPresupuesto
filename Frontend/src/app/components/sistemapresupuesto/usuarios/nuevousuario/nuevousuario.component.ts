@@ -70,11 +70,11 @@ export class NuevoUsuarioComponent implements OnInit {
 
   cargarUsuario(){
     this.usuarioService.getUsuario(this.editarId).subscribe(
-      resp=>{
+      (resp: Usuario)=>{
         this.usuario = resp;
         this.cargarFormulario();
       },
-      error=>{//opcional
+      (      _error: any)=>{//opcional
         //Manejo del error
         //Notificar("No se pudo guardar")
       }
