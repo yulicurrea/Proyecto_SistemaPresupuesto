@@ -1,8 +1,9 @@
+import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +13,61 @@ import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   cargando = false;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router,public _usuarioServices: UsuariosService) {
+
+  constructor(
+    private authService:AuthenticationService,
+    private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router)  {
     this.form = this.fb.group({
-      usuario: ['', Validators.required],
-      clave: ['', Validators.required]
+    usuario: ['', Validators.required],
+    clave: ['', Validators.required]
     })
   }
 
+  
   ngOnInit(): void {
   }
 
-  ingresar() {
-    this._usuarioServices.login(this.form.value).subscribe(resp =>{
-      if(resp===true){
-        this.carga();
-        this.router.navigate(['sistemapresupuesto']);
-      }else {
-        this.error()
-      }
-    })
+  cargar(){
+
+      this.cargando = true;
+      setTimeout(() =>{
+
+      this.cargando = false;
+
+  },1500);
+
   }
+
+  ingresar() {    
+    const usuario = this.form.value.usuario;
+    const clave = this.form.value.clave;
+    console.log(usuario, clave)
+    if (usuario && clave) {
+      this.loginBack(usuario,clave);
+      //this.carga();
+      
+    } else {
+      this.error();
+      this.form.reset();
+    }
+
+    }
+
+  loginBack(usuario:string, clave:string){
+    //Invocar servicio login
+    this.authService.login(usuario, clave).subscribe(
+      resp=>{
+        if(resp.token){
+          localStorage.setItem("TOKEN", resp.token);
+
+          this.router.navigate(["/sistemapresupuesto"])
+        }
+      }
+
+    );
+     
+  }
+
   error() {
     this._snackBar.open('Usuario o contraseña ingresados son invalidos.', '', {
 
@@ -41,12 +77,7 @@ export class LoginComponent implements OnInit {
 
     });
   }
-  carga() {
-    this.cargando = true;
-    setTimeout(() => {
 
-      this.cargando = false;
-
-    }, 1500);
-  }
 }
+
+

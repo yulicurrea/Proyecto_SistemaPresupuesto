@@ -66,11 +66,17 @@
           <div class="errors">
             <mat-form-field class="ancho"  appearance="fill">
               <mat-label>Rol</mat-label>
-              <input matInput formControlName="rol" class="form-control" required>
+              <mat-select  formControlName="rol" >
+                <mat-option *ngFor="let rol of roles" [value]="rol">
+                  {{rol}}
+                </mat-option>
+              </mat-select>              
               <mat-error
                 *ngIf="usuarioForm.get('rol').invalid && (usuarioForm.get('rol').touched || usuarioForm.get('rol').dirty)">
                 Ingrese un rol</mat-error>
             </mat-form-field>
+
+           
           </div>
         </div>
         <div class="form-group">

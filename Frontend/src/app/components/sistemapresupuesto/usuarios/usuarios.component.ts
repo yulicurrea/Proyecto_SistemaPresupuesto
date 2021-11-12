@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 
@@ -18,6 +19,7 @@ export class UsuariosComponent implements OnInit {
   
   
   constructor(public _usuarioServices: UsuariosService,
+    private router:Router,
     private _snackBar: MatSnackBar  ) {  }
 
   ngOnInit(): void {
@@ -30,12 +32,15 @@ export class UsuariosComponent implements OnInit {
         return this.usuarios = res;
       })
   }
-  eliminar(usuario: any){
-    window.location.reload();
+
+  editar(usuario:Usuario){
+    this.router.navigateByUrl("/nuevousuario/"+usuario.id);
+  }
+  eliminar(usuario: any){   
     this._usuarioServices.eliminarPersona(usuario.id).subscribe(resp=>{
       if(resp===true){
-        this.usuarios.pop();
         this.completo();
+        this.getUsuarios();
       }
     })
   }

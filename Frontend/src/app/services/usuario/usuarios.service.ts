@@ -13,6 +13,10 @@ export class UsuariosService {
 
   constructor(private httpClient: HttpClient ) { }
 
+  public getUsuario(id:string):Observable<Usuario>{
+    return this.httpClient.get<Usuario>(this.API_SERVER + id);
+  }
+
     public GetallUsuarios():Observable<Usuario[]>{
       return this.httpClient.get<Usuario[]>(this.API_SERVER);
     }
