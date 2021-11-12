@@ -1,5 +1,5 @@
 <div class="Formulario">
-  <h2>Registro Usuarios</h2>
+  <h2>Actualización de usuarios</h2>
 
   <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
     <div class="form-group">
@@ -35,10 +35,7 @@
           </mat-form-field>
         </div>
       </div>
-
       <div class="form-group">
-
-
         <div class="errors">
           <mat-form-field class="ancho" appearance="fill">
             <mat-label>Usuario</mat-label>
@@ -48,9 +45,7 @@
               Ingrese el usuario</mat-error>
           </mat-form-field>
         </div>
-
       </div>
-
       <div class="form-group">
         <div class="errors">
           <mat-form-field class="ancho" appearance="fill">
@@ -85,7 +80,8 @@
       </div>
 
       <br />
-      <button type="submit" mat-raised-button class="ancho button" color="primary" [disabled]="usuarioForm.invalid">Guardar Usuario</button>
+      <button type="submit" mat-raised-button class="ancho button" color="primary"
+        [disabled]="usuarioForm.invalid">Guardar Usuario</button>
 
 
     </div>
