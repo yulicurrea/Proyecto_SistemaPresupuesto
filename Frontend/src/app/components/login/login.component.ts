@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -12,29 +12,25 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 export class LoginComponent implements OnInit {
   form: FormGroup;
   cargando = false;
-  constructor(
-    private authService:AuthenticationService,
-    private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router,public _usuarioServices: UsuariosService) {
     this.form = this.fb.group({
       usuario: ['', Validators.required],
-      contraseña: ['', Validators.required]
+      clave: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
   }
 
-  ingresar() {    
-    const usuario = this.form.value.usuario;
-    const contraseña = this.form.value.contraseña;
-    if (usuario && contraseña) {
-      this.loginBack(usuario,contraseña);
-      //this.carga();
-      
-    } else {
-      this.error();
-      this.form.reset();
-    }
+  ingresar() {
+    this._usuarioServices.login(this.form.value).subscribe(resp =>{
+      if(resp===true){
+        this.carga();
+        this.router.navigate(['sistemapresupuesto']);
+      }else {
+        this.error()
+      }
+    })
   }
   error() {
     this._snackBar.open('Usuario o contraseña ingresados son invalidos.', '', {
@@ -52,23 +48,5 @@ export class LoginComponent implements OnInit {
       this.cargando = false;
 
     }, 1500);
-  }
-
-  loginBack(usuario:string, clave:string){
-    //Invocar servicio login
-    
-    this.authService.login(usuario, clave).subscribe(
-      resp=>{
-        if(resp.token){
-          localStorage.setItem("TOKEN", resp.token);
-
-          this.router.navigate(["/sistemapresupuesto"])
-        }
-      }
-
-    );
-    
-    
-    
   }
 }
