@@ -13,11 +13,15 @@ export class UsuariosService {
 
   constructor(private httpClient: HttpClient ) { }
 
+  public getUsuario(id:string):Observable<Usuario>{
+    return this.httpClient.get<Usuario>(this.API_SERVER + id);
+  }
+
     public GetallUsuarios():Observable<Usuario[]>{
       return this.httpClient.get<Usuario[]>(this.API_SERVER);
     }
     public guardar(usuario: any): Observable<any>{
-      return this.httpClient.post(this.API_SERVER,usuario);
+      return this.httpClient.post(this.API_SERVER,  usuario);
     }
     public eliminarPersona(id: string): Observable<any>{
       return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
