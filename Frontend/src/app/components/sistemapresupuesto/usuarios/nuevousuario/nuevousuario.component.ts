@@ -51,9 +51,15 @@ export class NuevoUsuarioComponent implements OnInit {
   }
 
   cargarFormulario(){
+    let fecha = "";    
+
+    if(this.usuario && this.usuario.fechaNacimiento){
+      fecha = this.usuario.fechaNacimiento.split('T')[0];     
+    }
+
     this.usuarioForm = this.fb.group({
       id: [this.usuario.id, Validators.required],
-      fechaNacimiento :[this.usuario.fechaNacimiento, Validators.required],
+      fechaNacimiento :[fecha, Validators.required],
       nombre :[this.usuario.nombre, Validators.required],
       apellido : [this.usuario.apellido, Validators.required],
       rol : [this.usuario.rol, Validators.required],
@@ -67,6 +73,10 @@ export class NuevoUsuarioComponent implements OnInit {
       resp=>{
         this.usuario = resp;
         this.cargarFormulario();
+      },
+      error=>{//opcional
+        //Manejo del error
+        //Notificar("No se pudo guardar")
       }
     );
 

@@ -15,57 +15,60 @@ export class LoginComponent implements OnInit {
   cargando = false;
 
   constructor(
-    private authService:AuthenticationService,
-    private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router)  {
+    private authService: AuthenticationService,
+    private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
     this.form = this.fb.group({
-    usuario: ['', Validators.required],
-    clave: ['', Validators.required]
+      usuario: ['', Validators.required],
+      clave: ['', Validators.required]
     })
   }
 
-  
+
   ngOnInit(): void {
   }
 
-  cargar(){
+  cargar() {
 
-      this.cargando = true;
-      setTimeout(() =>{
+    this.cargando = true;
+    setTimeout(() => {
 
       this.cargando = false;
 
-  },1500);
+    }, 1500);
 
   }
 
-  ingresar() {    
+  ingresar() {
     const usuario = this.form.value.usuario;
     const clave = this.form.value.clave;
     console.log(usuario, clave)
     if (usuario && clave) {
-      this.loginBack(usuario,clave);
+      this.loginBack(usuario, clave);
       //this.carga();
-      
+
     } else {
       this.error();
       this.form.reset();
     }
 
-    }
+  }
 
-  loginBack(usuario:string, clave:string){
+  loginBack(usuario: string, clave: string) {
     //Invocar servicio login
     this.authService.login(usuario, clave).subscribe(
-      resp=>{
-        if(resp.token){
+      resp => {
+        if (resp.token) {
           localStorage.setItem("TOKEN", resp.token);
 
           this.router.navigate(["/sistemapresupuesto"])
         }
+      },
+      error => {
+        this.error();
       }
 
     );
-     
+
   }
 
   error() {
