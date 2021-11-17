@@ -8,7 +8,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.component';
-import { EditarusuarioComponent } from './usuarios/editarusuario/editarusuario.component';
+import { PresupuestoComponent } from './inicio/presupuesto/presupuesto.component';
+import { CategoriasComponent } from './inicio/categorias/categorias.component';
+import { ConceptosComponent } from './inicio/conceptos/conceptos.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { EditarusuarioComponent } from './usuarios/editarusuario/editarusuario.c
     ReportesComponent,
     UsuariosComponent,
     NuevoUsuarioComponent,
-    EditarusuarioComponent
+    PresupuestoComponent,
+    CategoriasComponent,
+    ConceptosComponent
   ],
   imports: [
     CommonModule,

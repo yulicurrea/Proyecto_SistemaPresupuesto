@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoriasComponent } from './inicio/categorias/categorias.component';
+import { ConceptosComponent } from './inicio/conceptos/conceptos.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { PresupuestoComponent } from './inicio/presupuesto/presupuesto.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { SistemapresupuestoComponent } from './sistemapresupuesto.component';
-import { EditarusuarioComponent } from './usuarios/editarusuario/editarusuario.component';
 import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
@@ -15,7 +17,9 @@ const routes: Routes = [
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'reportes', component: ReportesComponent },
       {path:'nuevousuario',component:NuevoUsuarioComponent},
-      {path:'editarusuario',component:EditarusuarioComponent}
+      {path:'categorias',component:CategoriasComponent},
+      {path:'conceptos',component:ConceptosComponent},
+      {path:'presupuesto',component:PresupuestoComponent}
     ]
   }]
 
