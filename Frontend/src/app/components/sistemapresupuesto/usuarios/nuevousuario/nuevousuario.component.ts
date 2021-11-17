@@ -70,11 +70,11 @@ export class NuevoUsuarioComponent implements OnInit {
 
   cargarUsuario(){
     this.usuarioService.getUsuario(this.editarId).subscribe(
-      (resp: Usuario)=>{
+      resp=>{
         this.usuario = resp;
         this.cargarFormulario();
       },
-      (      _error: any)=>{//opcional
+      error=>{//opcional
         //Manejo del error
         //Notificar("No se pudo guardar")
       }
@@ -91,11 +91,12 @@ export class NuevoUsuarioComponent implements OnInit {
       );
   }
   guardar(): void {
+    this.completo();
     this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
     this.usuarioForm.reset();
     this.usuar = this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
     this.usuar.push(resp);
-    this.completo();
+    
     },
 
     error => { error() }
