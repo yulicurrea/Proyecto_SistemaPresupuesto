@@ -1,7 +1,7 @@
 import { Component , OnInit, ViewChild} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Presupuesto } from 'src/app/interfaces/Presupuesto';
+import { Presupuesto, PresupuestoVis, } from 'src/app/interfaces/Presupuesto';
 import { PresupuestoService } from 'src/app/_services/Presupuesto.service';
 @Component({
   selector: 'app-reportes',
@@ -10,9 +10,10 @@ import { PresupuestoService } from 'src/app/_services/Presupuesto.service';
 })
 export class ReportesComponent implements OnInit {
 
-  displayedColumns: string[] = ['anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
-
-  presupuesto: Presupuesto[] = [];
+  displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
+  presupuestos: Presupuesto[] = [];
+  presupuestosVis: PresupuestoVis[] = [];
+  presup: any;
 
   constructor(public _presupuestos: PresupuestoService,
     private router: Router,
@@ -25,7 +26,7 @@ export class ReportesComponent implements OnInit {
  
   getPresupuesto() {
     this._presupuestos.GetallPresupuesto().subscribe(res => {
-      return this.presupuesto = res;
+      return this.presupuestos = res;
     })
   }
 

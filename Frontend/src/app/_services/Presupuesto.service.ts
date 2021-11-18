@@ -9,11 +9,11 @@ import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 })
 
 export class PresupuestoService {
-  private API_SERVER = "http://localhost:8080/api/presupuestos/";
+  private API_SERVER = "http://localhost:8080/api/presupuestos";
 
   constructor(private httpClient: HttpClient ) { }
 
     public GetallPresupuesto():Observable<Presupuesto[]>{
-      return this.httpClient.get<Presupuesto[]>(this.API_SERVER + "getAll/");
+      return this.httpClient.get<Presupuesto[]>(this.API_SERVER + "/getAll");
     }  
 }
