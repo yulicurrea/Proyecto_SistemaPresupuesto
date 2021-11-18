@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Concepto } from 'src/app/interfaces/Concepto';
 import { Presupuesto, PresupuestoVis } from 'src/app/interfaces/Presupuesto';
+import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
 import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
 
 
@@ -18,13 +20,10 @@ interface Food {
 
 export class PresupuestoComponent implements OnInit {
 
-  displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
+  displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante','acciones'];
   presupuestoForm!: FormGroup;
   presupuestos: Presupuesto[] = [];
   presupuestosVis: PresupuestoVis[] = [];
-  presup: any;
-
-  selectedValue: string = "";
 
   conceptos: Concepto[] = [];
  
@@ -32,30 +31,72 @@ export class PresupuestoComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    public presupuestoService: PresupuestoService
+    public presupuestoService: PresupuestoService,public conceptoService: ConceptoService,private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.presupuestoForm = this.fb.group({
-      categoria: ['', Validators.required],
-      concepto: ['', Validators.required],
-      anio: ['', Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.min(1900), Validators.max(2099)],
-      presupuesto: ['', Validators.required, Validators.pattern(/^[0-9]+/)]
+      id_concepto: ['', Validators.required],
+      anio: ['', Validators.required],
+      ppto_asignado: ['', Validators.required]
     });;
     this.getPresupuestosVis()
+    this.getConceptos();
   }
   getPresupuestosVis() {
     this.presupuestoService.obtenerVis().subscribe(res => {
-      console.log(res);
       return this.presupuestosVis = res;
     })
   }
   guardar(): void {
+    console.log(this.presupuestoForm.value)
     this.presupuestoService.guardar(this.presupuestoForm.value).subscribe(resp => {
       this.presupuestoForm.reset();
-      this.presup = this.presup.filter((presupuesto: { id: any; }) => resp.id == presupuesto.id);
-      this.presup.push(resp);
+      if (resp.id_concepto == this.presupuestoForm.value.id_concepto) {
+        this.getPresupuestosVis();
+        this.menGuardarCorrecto()
+      } else {
+        this.menGuardarIncorrecto()
+      }
+      
     }
     );
+  }
+  
+  getConceptos(){
+    this.conceptoService.obtenerTodos().subscribe(res =>{
+      return this.conceptos=res;
+    })
+  }
+  eliminar(presupuesto: any) {
+    this.presupuestoService.eliminarPresupuesto(presupuesto.id)
+      .subscribe(resp => {
+        if (resp.id == presupuesto.id) {
+          this.getPresupuestosVis();
+          this.menEliminarCorrecto()
+        }
+    })
+  }
+ 
+  menEliminarCorrecto() {
+    this._snackBar.open('Presupuesto eliminado', '', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+  menGuardarCorrecto() {
+    this._snackBar.open('Presupuesto asignado', '', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+  menGuardarIncorrecto() {
+    this._snackBar.open('El presupuesto para este concepto ya ha sido asignado.', '', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 }

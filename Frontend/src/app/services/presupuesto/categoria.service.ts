@@ -19,6 +19,6 @@ export class CategoriaService {
       return this.httpClient.post(this.API_SERVER+"/saveCategoria",categoria);
     }
     public eliminar(id: number): Observable<any>{
-      return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
+      return this.httpClient.delete(this.API_SERVER+ "/deleteCategoria/" + id);
     }
 }

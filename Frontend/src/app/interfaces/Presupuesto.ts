@@ -1,7 +1,7 @@
 export interface Presupuesto{
     id:number;
     id_concepto:number;
-    anio:Date;
+    anio:number;
     ppto_asignado:number;
     porce_ppto_alcanzado:number;
     ppto_alcanzado:number;
@@ -11,7 +11,7 @@ export interface PresupuestoVis{
     id:number;
     categoria:string;
     concepto:string;
-    anio:Date;
+    anio:number;
     ppto_asignado:number;
     porce_ppto_alcanzado:number;
     ppto_alcanzado:number;
