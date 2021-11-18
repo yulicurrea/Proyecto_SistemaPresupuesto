@@ -12,18 +12,6 @@
       <br>
       <br>
       <mat-form-field appearance="fill" class="tam">
-        <mat-label>Categoría</mat-label>
-        <mat-select formControlName="categoria" required>
-          <mat-option *ngFor="let cat of categorias" [value]="cat.id">
-            {{cat.categoria}}
-          </mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="presupuestoForm.get('categoria').invalid && (presupuestoForm.get('categoria').touched || presupuestoForm.get('categoria').dirty)">
-          Seleccione la categoría.</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="tam">
         <mat-label>Concepto</mat-label>
         <mat-select formControlName="concepto" required>
           <mat-option *ngFor="let con of conceptos" [value]="con.id">
@@ -61,8 +49,7 @@
   </div>
 
   <hr>
-  <table mat-table [dataSource]="presupuestos" class="mat-elevation-z8 demo-table">
-
+  <table mat-table [dataSource]="presupuestosVis" class="mat-elevation-z8 demo-table">
     <ng-container matColumnDef="categoria">
       <th mat-header-cell *matHeaderCellDef> CATEGORÍA </th>
       <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>

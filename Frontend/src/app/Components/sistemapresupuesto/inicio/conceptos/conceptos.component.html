@@ -11,6 +11,17 @@
       <mat-label class="tam texto">Agregar concepto</mat-label>
       <br>
       <br>
+      <mat-form-field appearance="fill" class="tam">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="categoria" required>
+          <mat-option *ngFor="let cat of categorias" [value]="cat.id">
+            {{cat.categoria}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="conceptoForm.get('categoria').invalid && (conceptoForm.get('categoria').touched || conceptoForm.get('categoria').dirty)">
+          Seleccione la categoría.</mat-error>
+      </mat-form-field>
       <mat-form-field class="tam" appearance="fill">
         <mat-label>Concepto</mat-label>
         <input matInput formControlName="concepto" required autocomplete="off">
@@ -30,6 +41,10 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef> CATEGORIA </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
     </ng-container>
     <ng-container matColumnDef="concepto">
       <th mat-header-cell *matHeaderCellDef> CONCEPTO </th>

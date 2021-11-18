@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Categoria } from 'src/app/interfaces/Categoria';
 import { Concepto } from 'src/app/interfaces/Concepto';
-import { Presupuesto } from 'src/app/interfaces/Presupuesto';
-import { PresupuestoService } from 'src/app/services/presupuesto.service';
+import { Presupuesto, PresupuestoVis } from 'src/app/interfaces/Presupuesto';
+import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
 
 
 interface Food {
@@ -22,19 +21,13 @@ export class PresupuestoComponent implements OnInit {
   displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
   presupuestoForm!: FormGroup;
   presupuestos: Presupuesto[] = [];
+  presupuestosVis: PresupuestoVis[] = [];
   presup: any;
 
   selectedValue: string = "";
 
-  conceptos: Concepto[] = [
-    { id: 1, concepto: "Luz" },
-    { id: 2, concepto: "Salarios" },
-    { id: 3, concepto: "Ventas" }
-  ];
-  categorias: Categoria[] = [
-    { id: 1, categoria: "Ingreso" },
-    { id: 2, categoria: "Gasto" }
-  ];
+  conceptos: Concepto[] = [];
+ 
 
 
   constructor(
@@ -49,6 +42,13 @@ export class PresupuestoComponent implements OnInit {
       anio: ['', Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.min(1900), Validators.max(2099)],
       presupuesto: ['', Validators.required, Validators.pattern(/^[0-9]+/)]
     });;
+    this.getPresupuestosVis()
+  }
+  getPresupuestosVis() {
+    this.presupuestoService.obtenerVis().subscribe(res => {
+      console.log(res);
+      return this.presupuestosVis = res;
+    })
   }
   guardar(): void {
     this.presupuestoService.guardar(this.presupuestoForm.value).subscribe(resp => {

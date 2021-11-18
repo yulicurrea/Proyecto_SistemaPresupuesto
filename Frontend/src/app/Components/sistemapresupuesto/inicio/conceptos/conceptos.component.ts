@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Concepto } from 'src/app/interfaces/Concepto';
+import { Categoria } from 'src/app/interfaces/Categoria';
+import { ConceptoVis } from 'src/app/interfaces/Concepto';
 import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
 
 @Component({
@@ -10,9 +11,10 @@ import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
 })
 export class ConceptosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'concepto'];
+  displayedColumns: string[] = ['id','categoria', 'concepto'];
   conceptoForm!: FormGroup;
-  conceptos: Concepto[] = [];
+  conceptos: ConceptoVis[] = [];
+  categorias: Categoria[]=[];
   con: any;
 
   constructor(public fb: FormBuilder,
@@ -20,8 +22,15 @@ export class ConceptosComponent implements OnInit {
 
   ngOnInit(): void {
     this.conceptoForm = this.fb.group({
-      concepto: ['', Validators.required]
+      concepto: ['', Validators.required],
+      categoria: ['', Validators.required]
     });;
+    this.getConceptosVis()
+  }
+  getConceptosVis() {
+    this.conceptoService.obtener().subscribe(res => {
+      return this.conceptos = res;
+    })
   }
   guardar(): void {
     this.conceptoService.guardar(this.conceptoForm.value).subscribe(resp => {
