@@ -20,18 +20,18 @@ interface Food {
 
 export class PresupuestoComponent implements OnInit {
 
-  displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante','acciones'];
+  displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante', 'acciones'];
   presupuestoForm!: FormGroup;
   presupuestos: Presupuesto[] = [];
   presupuestosVis: PresupuestoVis[] = [];
 
   conceptos: Concepto[] = [];
- 
+
 
 
   constructor(
     public fb: FormBuilder,
-    public presupuestoService: PresupuestoService,public conceptoService: ConceptoService,private _snackBar: MatSnackBar
+    public presupuestoService: PresupuestoService, public conceptoService: ConceptoService, private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -58,14 +58,14 @@ export class PresupuestoComponent implements OnInit {
       } else {
         this.menGuardarIncorrecto()
       }
-      
+
     }
     );
   }
-  
-  getConceptos(){
-    this.conceptoService.obtenerTodos().subscribe(res =>{
-      return this.conceptos=res;
+
+  getConceptos() {
+    this.conceptoService.obtenerTodos().subscribe(res => {
+      return this.conceptos = res;
     })
   }
   eliminar(presupuesto: any) {
@@ -75,28 +75,31 @@ export class PresupuestoComponent implements OnInit {
           this.getPresupuestosVis();
           this.menEliminarCorrecto()
         }
-    })
+      })
   }
- 
+
   menEliminarCorrecto() {
     this._snackBar.open('Presupuesto eliminado', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
     });
   }
   menGuardarCorrecto() {
     this._snackBar.open('Presupuesto asignado', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
     });
   }
   menGuardarIncorrecto() {
     this._snackBar.open('El presupuesto para este concepto ya ha sido asignado.', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarErr']
     });
   }
 }

@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
 
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarErr']
     });
   }
 

@@ -59,21 +59,23 @@ export class ConceptosComponent implements OnInit {
         } else {
           this.menEliminarIncorrecto()
         }
-    })
+      })
   }
- 
+
   menEliminarCorrecto() {
     this._snackBar.open('Concepto eliminado', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
     });
   }
   menEliminarIncorrecto() {
     this._snackBar.open('El concepto no puede ser eliminado, dado que esta siendo usado en el presupuesto.', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarErr']
     });
   }
   menGuardar() {
@@ -81,8 +83,8 @@ export class ConceptosComponent implements OnInit {
 
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
     });
   }
 }

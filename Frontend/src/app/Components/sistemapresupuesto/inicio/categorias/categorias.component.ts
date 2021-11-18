@@ -55,23 +55,26 @@ export class CategoriasComponent implements OnInit {
     this._snackBar.open('Categoría eliminada', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
     });
   }
   menEliminarIncorrecto() {
     this._snackBar.open('La categoría no puede ser eliminada, dado que esta siendo usada en los conceptos.', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarErr']
     });
+    
   }
   menGuardar() {
     this._snackBar.open('Categoria agregada.', '', {
 
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
     });
   }
 }
