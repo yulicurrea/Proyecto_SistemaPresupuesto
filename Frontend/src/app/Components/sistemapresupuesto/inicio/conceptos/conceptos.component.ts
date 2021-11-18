@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Categoria } from 'src/app/interfaces/Categoria';
 import { ConceptoVis } from 'src/app/interfaces/Concepto';
+import { CategoriaService } from 'src/app/services/presupuesto/categoria.service';
 import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
 
 @Component({
@@ -11,21 +13,29 @@ import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
 })
 export class ConceptosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','categoria', 'concepto'];
+  displayedColumns: string[] = ['id', 'categoria', 'concepto', 'acciones'];
   conceptoForm!: FormGroup;
   conceptos: ConceptoVis[] = [];
-  categorias: Categoria[]=[];
+  categorias: Categoria[] = [];
   con: any;
+  error: any;
 
   constructor(public fb: FormBuilder,
-    public conceptoService: ConceptoService) { }
+    public conceptoService: ConceptoService, public categoriaService: CategoriaService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.conceptoForm = this.fb.group({
       concepto: ['', Validators.required],
-      categoria: ['', Validators.required]
+      id_categoria: ['', Validators.required]
     });;
     this.getConceptosVis()
+    this.getCategorias()
+  }
+  getCategorias() {
+    this.categoriaService.obtenerTodas().subscribe(res => {
+      return this.categorias = res;
+    })
   }
   getConceptosVis() {
     this.conceptoService.obtener().subscribe(res => {
@@ -35,9 +45,46 @@ export class ConceptosComponent implements OnInit {
   guardar(): void {
     this.conceptoService.guardar(this.conceptoForm.value).subscribe(resp => {
       this.conceptoForm.reset();
-      this.con = this.con.filter((concep: { id: any; }) => resp.id == concep.id);
-      this.con.push(resp);
+      this.menGuardar()
+      this.getConceptosVis()
     }
     );
+  }
+  eliminar(concepto: any) {
+    this.conceptoService.eliminar(concepto.id)
+      .subscribe(resp => {
+        if (resp.id == concepto.id) {
+          this.getConceptosVis()
+          this.menEliminarCorrecto()
+        } else {
+          this.menEliminarIncorrecto()
+        }
+      })
+  }
+
+  menEliminarCorrecto() {
+    this._snackBar.open('Concepto eliminado', '', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
+    });
+  }
+  menEliminarIncorrecto() {
+    this._snackBar.open('El concepto no puede ser eliminado, dado que esta siendo usado en el presupuesto.', '', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarErr']
+    });
+  }
+  menGuardar() {
+    this._snackBar.open('Concepto agregado.', '', {
+
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: ['snackbarOk']
+    });
   }
 }

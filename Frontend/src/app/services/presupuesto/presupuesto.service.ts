@@ -19,9 +19,9 @@ export class PresupuestoService {
       return this.httpClient.get<PresupuestoVis[]>(this.API_SERVER+"/obtenerPre");
     }
     public guardar(presupuesto: any): Observable<any>{
-      return this.httpClient.post(this.API_SERVER,presupuesto);
+      return this.httpClient.post(this.API_SERVER+"/savePresupuesto",presupuesto);
     }
     public eliminarPresupuesto(id: string): Observable<any>{
-      return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
+      return this.httpClient.delete(this.API_SERVER+ "/deletePresupuesto/" + id);
     }
 }

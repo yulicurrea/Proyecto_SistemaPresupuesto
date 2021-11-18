@@ -14,15 +14,15 @@ export class ConceptoService {
   constructor(private httpClient: HttpClient ) { }
 
     public obtenerTodos():Observable<Concepto[]>{
-      return this.httpClient.get<Concepto[]>(this.API_SERVER);
+      return this.httpClient.get<Concepto[]>(this.API_SERVER+"/getAll");
     }
     public obtener():Observable<ConceptoVis[]>{
       return this.httpClient.get<ConceptoVis[]>(this.API_SERVER+"/obtener");
     }
     public guardar(concepto: any): Observable<any>{
-      return this.httpClient.post(this.API_SERVER,concepto);
+      return this.httpClient.post(this.API_SERVER+"/saveConcepto",concepto);
     }
     public eliminar(id: number): Observable<any>{
-      return this.httpClient.delete(this.API_SERVER+ "delete/" + id);
+      return this.httpClient.delete(this.API_SERVER+ "/deleteConcepto/" + id);
     }
 }
