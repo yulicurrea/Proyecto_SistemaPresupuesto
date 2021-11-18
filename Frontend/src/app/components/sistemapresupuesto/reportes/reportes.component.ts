@@ -1,6 +1,6 @@
-import { Component , OnInit} from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import { Component , OnInit, ViewChild} from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 import { PresupuestoService } from 'src/app/_services/Presupuesto.service';
 @Component({
@@ -10,33 +10,23 @@ import { PresupuestoService } from 'src/app/_services/Presupuesto.service';
 })
 export class ReportesComponent implements OnInit {
 
-  title(title: any) {
-    throw new Error('Method not implemented.');
-  }
-  
-  displayedColumns: string[] = ['anio', 'ppto_concepto', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
+  displayedColumns: string[] = ['anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
 
   presupuesto: Presupuesto[] = [];
 
-  constructor(
-    public fb: FormBuilder,
-    public presupuestoService: PresupuestoService,
-    public location: Location
-  ){
+  constructor(public _presupuestos: PresupuestoService,
+    private router: Router,
+    private _snackBar: MatSnackBar) {
 
   }
   ngOnInit(): void {
-   
+      this.getPresupuesto()
   }
  
-  getPresupuesto():void{
-    this.presupuestoService.GetallPresupuesto().subscribe(resp => {
-      
-      return this.presupuesto = resp;
-
-      },
-        error => { console.error(error) }
-      );
+  getPresupuesto() {
+    this._presupuestos.GetallPresupuesto().subscribe(res => {
+      return this.presupuesto = res;
+    })
   }
 
 }
