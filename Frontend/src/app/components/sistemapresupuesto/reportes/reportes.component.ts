@@ -2,7 +2,7 @@ import { Component , OnInit, ViewChild} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Presupuesto, PresupuestoVis, } from 'src/app/interfaces/Presupuesto';
-import { PresupuestoService } from 'src/app/_services/Presupuesto.service';
+import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
