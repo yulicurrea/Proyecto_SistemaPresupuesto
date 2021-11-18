@@ -15,19 +15,20 @@ export class ReportesComponent implements OnInit {
   presupuestosVis: PresupuestoVis[] = [];
   presup: any;
 
-  constructor(public _presupuestos: PresupuestoService,
+  constructor(public presupuestoService: PresupuestoService,
     private router: Router,
     private _snackBar: MatSnackBar) {
 
   }
 
   ngOnInit(): void {
-      this.getPresupuesto()
+    this.getPresupuestosVis()
   }
  
-  getPresupuesto() {
-    this._presupuestos.GetallPresupuesto().subscribe(res => {
-      return this.presupuestos = res;
+  getPresupuestosVis() {
+    this.presupuestoService.obtenerVis().subscribe(res => {
+      console.log(res);
+      return this.presupuestosVis = res;
     })
   }
 }
