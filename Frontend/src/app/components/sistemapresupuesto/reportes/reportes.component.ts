@@ -20,6 +20,7 @@ export class ReportesComponent implements OnInit {
     private _snackBar: MatSnackBar) {
 
   }
+
   ngOnInit(): void {
       this.getPresupuesto()
   }
@@ -29,5 +30,4 @@ export class ReportesComponent implements OnInit {
       return this.presupuestos = res;
     })
   }
-
 }
