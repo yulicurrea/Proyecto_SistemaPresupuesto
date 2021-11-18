@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 
-
-
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
