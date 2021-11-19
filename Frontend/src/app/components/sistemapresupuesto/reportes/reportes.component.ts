@@ -5,6 +5,11 @@ import { Presupuesto, PresupuestoVis, } from 'src/app/interfaces/Presupuesto';
 import { PresupuestoDTO } from 'src/app/interfaces/presupuestoDTO';
 import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
 import { PresupuestoVisService } from 'src/app/services/presupuesto/presupuestovis.service';
+
+
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
@@ -31,14 +36,14 @@ export class ReportesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPresupuestosVis();
+    //this.getPresupuestosVis();
 
     this.getIngresos();
     this.getEgresos();
 
   }
  
-  getPresupuestosVis() {
+  getPresupuestosVis() {//No se usa
     this.presupuestoService.obtenerVis().subscribe(res => {
       console.log(res);
       return this.presupuestosVis = res;
@@ -79,6 +84,36 @@ export class ReportesComponent implements OnInit {
         })
       }
     );
+  }
+
+
+  exportarPDF(){
+    const DATA = document.getElementById('contenedorPDF');
+    const doc = new jsPDF('p','pt','a4');
+    
+    const options = {
+      background: 'white',
+      scale: 3
+    }
+    
+    html2canvas(DATA, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`Presupuesto.pdf`);
+    });
+
+
+   
   }
 
 }
