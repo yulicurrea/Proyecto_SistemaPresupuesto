@@ -39,7 +39,6 @@ export class PresupuestoComponent implements OnInit {
       id_concepto: ['', Validators.required],
       anio: ['', Validators.required],
       ppto_asignado: ['', Validators.required],
-      periodo: ['', Validators.required]
     });;
     this.getPresupuestosVis()
     this.getConceptos();

@@ -1,0 +1,95 @@
+<div class="formularioRegistro">
+  <mat-toolbar>
+    <span>Ingresos</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <table mat-table [dataSource]="ingresos.datos" class="mat-elevation-z8 demo-table">
+    
+
+    <ng-container matColumnDef="concepto">
+      <th mat-header-cell *matHeaderCellDef> CONCEPTO </th>
+      <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="anio">
+      <th mat-header-cell *matHeaderCellDef> AÑO </th>
+      <td mat-cell *matCellDef="let element"> {{element.anio}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ppto_asignado">
+      <th mat-header-cell *matHeaderCellDef class="text-right"> PRESUPUESTO ASIGNADO </th>
+      <td mat-cell *matCellDef="let element" class="text-right"> {{element.ppto_asignado | currency:'':true:'1.0-0' }} </td>
+    </ng-container>
+    <ng-container matColumnDef="porce_ppto_alcanzado">
+      <th mat-header-cell *matHeaderCellDef class="text-right"> % PRESUPUESTO ALCANZADO </th>
+      <td mat-cell *matCellDef="let element" class="text-right">{{element.porce_ppto_alcanzado | number:'3.1-2'}}%</td>
+    </ng-container>
+    <ng-container matColumnDef="ppto_alcanzado">
+      <th mat-header-cell *matHeaderCellDef class="text-right"> PRESUPUESTO ALCANZADO </th>
+      <td mat-cell *matCellDef="let element" class="text-right"> {{element.ppto_alcanzado | currency:'':true:'1.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ppto_restante">
+      <th mat-header-cell *matHeaderCellDef class="text-right"> PRESUPUESTO RESTANTE </th>
+      <td mat-cell *matCellDef="let element" class="text-right"> {{element.ppto_restante | currency:'':true:'1.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;">
+        <a class="pointer" routerLink='' style="color:#e15639" matTooltip="Eliminar presupuesto">
+          <mat-icon>delete</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   
+  </table>
+  </div>
+
+
+  <div class="formularioRegistro">
+    <mat-toolbar>
+      <span>Egresos</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+    <table mat-table [dataSource]="egresos.datos" class="mat-elevation-z8 demo-table">
+     
+  
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef> CONCEPTO </th>
+        <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="anio">
+        <th mat-header-cell *matHeaderCellDef> AÑO </th>
+        <td mat-cell *matCellDef="let element"> {{element.anio}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="ppto_asignado">
+        <th mat-header-cell *matHeaderCellDef class="text-right"> PRESUPUESTO ASIGNADO </th>
+        <td mat-cell *matCellDef="let element" class="text-right"> {{element.ppto_asignado | currency:'':true:'1.0-0'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="porce_ppto_alcanzado">
+        <th mat-header-cell *matHeaderCellDef class="text-right"> % PRESUPUESTO ALCANZADO </th>
+        <td mat-cell *matCellDef="let element" class="text-right">{{element.porce_ppto_alcanzado | number:'3.1-2'}}% </td>
+      </ng-container>
+      <ng-container matColumnDef="ppto_alcanzado">
+        <th mat-header-cell *matHeaderCellDef class="text-right"> PRESUPUESTO ALCANZADO </th>
+        <td mat-cell *matCellDef="let element" class="text-right"> {{element.ppto_alcanzado | currency:'':true:'1.0-0'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ppto_restante">
+        <th mat-header-cell *matHeaderCellDef class="text-right"> PRESUPUESTO RESTANTE </th>
+        <td mat-cell *matCellDef="let element" class="text-right"> {{element.ppto_restante | currency:'':true:'1.0-0'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" style="text-align: right;">
+          <a class="pointer" routerLink='' style="color:#e15639" matTooltip="Eliminar presupuesto">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>

@@ -6,7 +6,6 @@ export interface Presupuesto{
     porce_ppto_alcanzado:number;
     ppto_alcanzado:number;
     ppto_restante:number;
-    periodo:string;
 }
 export interface PresupuestoVis{
     id:number;
@@ -17,5 +16,4 @@ export interface PresupuestoVis{
     porce_ppto_alcanzado:number;
     ppto_alcanzado:number;
     ppto_restante:number;
-    periodo?:string;
 }
