@@ -38,18 +38,6 @@
           *ngIf="presupuestoForm.get('ppto_asignado').invalid && (presupuestoForm.get('ppto_asignado').touched || presupuestoForm.get('ppto_asignado').dirty)">
           Ingrese el valor del presupuesto mensual.</mat-error>
       </mat-form-field>
-
-      <mat-form-field appearance="fill" class="tam">
-        <mat-label>Mes</mat-label>
-        <mat-select formControlName="periodo" required>
-          <mat-option value="Anual">Anual</mat-option>
-          <mat-option value="Mensual">Mensual</mat-option>
-        </mat-select>
-        <mat-error
-        *ngIf="presupuestoForm.get('periodo').invalid && (presupuestoForm.get('periodo').touched || presupuestoForm.get('periodo').dirty)">
-        Ingrese el mes</mat-error>
-       </mat-form-field>
-     
       <br>
       <br>
       <button mat-stroked-button color="primary" class="btn" [disabled]="presupuestoForm.invalid">Crear
