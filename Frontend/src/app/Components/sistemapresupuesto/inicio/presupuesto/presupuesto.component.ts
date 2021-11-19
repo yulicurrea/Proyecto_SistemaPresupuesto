@@ -51,14 +51,16 @@ export class PresupuestoComponent implements OnInit {
   guardar(): void {
     console.log(this.presupuestoForm.value)
     this.presupuestoService.guardar(this.presupuestoForm.value).subscribe(resp => {
-      this.presupuestoForm.reset();
+      
+      console.log(resp.id_concepto);
+      console.log(this.presupuestoForm.value.id_concepto);
       if (resp.id_concepto == this.presupuestoForm.value.id_concepto) {
         this.getPresupuestosVis();
         this.menGuardarCorrecto()
       } else {
         this.menGuardarIncorrecto()
       }
-
+      this.presupuestoForm.reset();
     }
     );
   }
