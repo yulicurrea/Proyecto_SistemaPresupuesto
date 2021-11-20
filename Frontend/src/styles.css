@@ -13,3 +13,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .snackbarErr{
     background: #E57373;
 }
+
+.formularioRegistro table tbody tr:last-child {
+    background: #e6e6e6;
+    font-weight: 500;
+}
