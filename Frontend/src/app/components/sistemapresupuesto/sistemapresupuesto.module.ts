@@ -11,7 +11,6 @@ import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.comp
 import { PresupuestoComponent } from './inicio/presupuesto/presupuesto.component';
 import { CategoriasComponent } from './inicio/categorias/categorias.component';
 import { ConceptosComponent } from './inicio/conceptos/conceptos.component';
-import { DashboardComponent } from './reportes/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { DashboardComponent } from './reportes/dashboard/dashboard.component';
     NuevoUsuarioComponent,
     PresupuestoComponent,
     CategoriasComponent,
-    ConceptosComponent,
-    DashboardComponent
+    ConceptosComponent
   ],
   imports: [
     CommonModule,
