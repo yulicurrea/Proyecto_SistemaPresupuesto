@@ -7,7 +7,7 @@
   </mat-toolbar>
   <hr>
   <div class="formulario">
-
+    
     <form [formGroup]="presupuestoForm" (ngSubmit)="guardar()">
       <mat-label class="tam texto">Agregar presupuesto</mat-label>
       <br>
@@ -43,8 +43,7 @@
       <br>
       <button mat-stroked-button color="primary" class="btn" [disabled]="presupuestoForm.invalid">Crear
         Presupuesto</button>
-      <button mat-stroked-button color="primary" class="btn" routerLink='/sistemapresupuesto/reportes'>Ver
-        plantilla</button>
+      <button mat-stroked-button color="primary" class="btn" routerLink='/sistemapresupuesto/reportes'>Ver plantilla</button>
     </form>
 
   </div>
@@ -69,7 +68,7 @@
 
     <ng-container matColumnDef="ppto_asignado">
       <th mat-header-cell *matHeaderCellDef> PRESUPUESTO ASIGNADO </th>
-      <td mat-cell *matCellDef="let element">{{element.ppto_asignado | currency:'':true:'1.0-0'}} </td>
+      <td mat-cell *matCellDef="let element">{{element.ppto_asignado | currency}} </td>
     </ng-container>
     <ng-container matColumnDef="porce_ppto_alcanzado">
       <th mat-header-cell *matHeaderCellDef> % PRESUPUESTO ALCANZADO </th>
@@ -77,16 +76,16 @@
     </ng-container>
     <ng-container matColumnDef="ppto_alcanzado">
       <th mat-header-cell *matHeaderCellDef> PRESUPUESTO ALCANZADO </th>
-      <td mat-cell *matCellDef="let element"> {{element.ppto_alcanzado | currency:'':true:'1.0-0'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.ppto_alcanzado | currency}} </td>
     </ng-container>
     <ng-container matColumnDef="ppto_restante">
       <th mat-header-cell *matHeaderCellDef> PRESUPUESTO RESTANTE </th>
-      <td mat-cell *matCellDef="let element"> {{element.ppto_restante | currency:'':true:'1.0-0'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.ppto_restante | currency}} </td>
     </ng-container>
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" style="text-align: right;">
-        <a class="pointer" (click)="eliminar(element)" style="color:#e15639" matTooltip="Eliminar presupuesto">
+        <a class="pointer" (click) ="eliminar(element)" style="color:#e15639" matTooltip="Eliminar presupuesto">
           <mat-icon>delete</mat-icon>
         </a>
       </td>

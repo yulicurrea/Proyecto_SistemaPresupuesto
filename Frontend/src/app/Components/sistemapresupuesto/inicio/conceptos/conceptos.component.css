@@ -5,10 +5,10 @@ table {
   width: 100%;
 }
 .formulario{
+  width: 100%;
   margin-top: 2%;
   margin-bottom: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
+  height: 100%;
   vertical-align: center;
 }
 .tam{
@@ -23,9 +23,4 @@ table {
 .texto{
   color:grey;
   font-size:20px;
-}
-.con{
-  width: 50%;
-  height:90%;
-  margin: 0 auto;
 }
