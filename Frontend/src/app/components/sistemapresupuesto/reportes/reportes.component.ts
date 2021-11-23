@@ -116,4 +116,8 @@ export class ReportesComponent implements OnInit {
    
   }
 
+  exportarPDF2(){
+    
+  }
+
 }
