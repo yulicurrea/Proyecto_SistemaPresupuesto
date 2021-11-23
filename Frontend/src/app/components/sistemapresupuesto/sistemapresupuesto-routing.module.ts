@@ -5,7 +5,7 @@ import { CategoriasComponent } from './inicio/categorias/categorias.component';
 import { ConceptosComponent } from './inicio/conceptos/conceptos.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PresupuestoComponent } from './inicio/presupuesto/presupuesto.component';
-import { DashboardComponent } from './reportes/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { SistemapresupuestoComponent } from './sistemapresupuesto.component';
 import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.component';
