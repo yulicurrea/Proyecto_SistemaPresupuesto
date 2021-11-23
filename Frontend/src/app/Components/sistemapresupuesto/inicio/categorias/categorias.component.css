@@ -5,10 +5,10 @@
     width: 100%;
   }
   .formulario{
-    width: 100%;
     margin-top: 2%;
     margin-bottom: 2%;
-    height: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
     vertical-align: center;
   }
   .tam{
@@ -24,4 +24,8 @@
     color:grey;
     font-size:20px;
   }
- 
+.cat{
+    width: 50%;
+    height:90%;
+    margin: 0 auto;
+}
