@@ -33,7 +33,7 @@ export class Grafico1Component implements OnInit {
     this.conceptos = [];
     this.ppto_asignado = [];
     this.ppto_alcanzado = [];
-    this.dashboardService.obtenerDatosGraficoPpto("1").subscribe(res => {
+    this.dashboardService.obtenerDatosGraficoPpto(1).subscribe(res => {
       res.forEach(element => {
         this.conceptos.push(element.concepto);
         this.ppto_asignado.push(element.ppto_asignado);

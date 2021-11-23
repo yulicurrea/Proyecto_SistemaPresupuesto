@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import {ChartOptions, ChartType } from 'chart.js';
+import { Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 @Component({
@@ -10,23 +10,37 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 })
 export class Grafico3Component implements OnInit {
 
-  conceptos: String[] = [];
-  ppto_asignado: Number[] = [];
-  ppto_alcanzado: Number[] = [];
+  total_presupuestos : Number[] = [];
 
-  public barChartOptions: ChartOptions = {
+ public pieChartLabels: Label[] = ['Presupuesto asignado','Presupuesto alcanzado','Presupuesto restante'];
+  public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [];
-
-  public barChartData: ChartDataSets[] = [];
+  public pieChartData: SingleDataSet = [0,0,0];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
 
   constructor(public dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.getDatosPptoGrafico()
   }
+  getDatosPptoGrafico() {
+    this.total_presupuestos = [];
+    this.dashboardService.obtenerDatosGraficoPptoTotal(1).subscribe(res => {
+      res.forEach(element => {
+        this.total_presupuestos=[element.total_ppto_asignado,element.total_ppto_alcanzado,element.total_ppto_restante]
+        
+      });
+      this.cargarDatosGrafica(this.total_presupuestos);
+    })
+  }
+
+  cargarDatosGrafica(total_presupuestos) {
   
+    this.pieChartData = [];
+    this.pieChartData.push(total_presupuestos);
+  }
+
 }

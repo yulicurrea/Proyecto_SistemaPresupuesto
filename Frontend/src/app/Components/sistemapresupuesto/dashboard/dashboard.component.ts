@@ -27,42 +27,7 @@ export class DashboardComponent implements OnInit {
   constructor(public dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.getDatosPptoGrafico1();
-    this.getDatosPptoGrafico2();
+   
   }
-  getDatosPptoGrafico1() {
-    this.conceptos = [];
-    this.ppto_asignado = [];
-    this.ppto_alcanzado = [];
-    this.dashboardService.obtenerDatosGraficoPpto("1").subscribe(res => {
-      res.forEach(element => {
-        this.conceptos.push(element.concepto);
-        this.ppto_asignado.push(element.ppto_asignado);
-        this.ppto_alcanzado.push(element.ppto_alcanzado)
-      });
-      this.cargarDatosGrafica(this.conceptos, this.ppto_asignado, this.ppto_alcanzado);
-    })
-  }
-  getDatosPptoGrafico2() {
-    this.conceptos = [];
-    this.ppto_asignado = [];
-    this.ppto_alcanzado = [];
-    this.dashboardService.obtenerDatosGraficoPpto("2").subscribe(res => {
-      res.forEach(element => {
-        this.conceptos.push(element.concepto);
-        this.ppto_asignado.push(element.ppto_asignado);
-        this.ppto_alcanzado.push(element.ppto_alcanzado)
-      });
-      this.cargarDatosGrafica(this.conceptos, this.ppto_asignado, this.ppto_alcanzado);
-    })
-  }
-  cargarDatosGrafica(concepto, ppto_asignado, ppto_alcanzado) {
-    this.barChartData = [];
-    this.barChartLabels = [];
-    for (const index in concepto) {
-      this.barChartLabels.push(concepto[index]);
-    }
-      this.barChartData.push({data: ppto_asignado,label:'Presupuesto Asignado'},{data: ppto_alcanzado,label:'Presupuesto Alcanzado'})
-    
-  }
+ 
 }

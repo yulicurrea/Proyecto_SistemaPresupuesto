@@ -32,7 +32,7 @@ export class Grafico2Component implements OnInit {
     this.conceptos = [];
     this.ppto_asignado = [];
     this.ppto_alcanzado = [];
-    this.dashboardService.obtenerDatosGraficoPpto("2").subscribe(res => {
+    this.dashboardService.obtenerDatosGraficoPpto(2).subscribe(res => {
       res.forEach(element => {
         this.conceptos.push(element.concepto);
         this.ppto_asignado.push(element.ppto_asignado);
