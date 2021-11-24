@@ -118,7 +118,7 @@ export class ReportesComponent implements OnInit {
   exportarPDF2() {
     this.presupuestoVisService.exportaPDF().subscribe(res => {
     
-      const blob: Blob = new Blob([res], {type: 'application/csv'});
+      const blob: Blob = new Blob([res], {type: 'application/pdf'});
       const fileName: string = 'Presupuesto.pdf';
       const objectUrl: string = URL.createObjectURL(blob);
       const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
