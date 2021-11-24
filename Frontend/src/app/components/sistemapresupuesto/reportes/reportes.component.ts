@@ -1,7 +1,15 @@
-import { Component , OnInit} from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
+import { Component , OnInit, ViewChild} from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Presupuesto, PresupuestoVis, } from 'src/app/interfaces/Presupuesto';
+import { PresupuestoDTO } from 'src/app/interfaces/presupuestoDTO';
+import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
+import { PresupuestoVisService } from 'src/app/services/presupuesto/presupuestovis.service';
+
+
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
@@ -9,52 +17,107 @@ import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 })
 export class ReportesComponent implements OnInit {
 
-  title(title: any) {
-    throw new Error('Method not implemented.');
+  displayedColumns: string[] = ['concepto', 'anio', 'ppto_asignado', 'porce_ppto_alcanzado', 'ppto_alcanzado', 'ppto_restante'];
+  presupuestos: Presupuesto[] = [];
+  presupuestosVis: PresupuestoVis[] = [];
+  presup: any;
+
+
+  idIngresos = 1;
+  idEgresos  = 2;
+  ingresos: PresupuestoDTO = new PresupuestoDTO();
+  egresos: PresupuestoDTO = new PresupuestoDTO();
+
+  constructor(public presupuestoService: PresupuestoService,
+    private presupuestoVisService: PresupuestoVisService,
+    private router: Router,
+    private _snackBar: MatSnackBar) {
+
   }
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'cedula', 'usuario','rol'];
-  usuarioForm!: FormGroup;
-  usuar:any;
-  
-  
-  constructor(
-    public fb: FormBuilder,
-    public usuarioService: UsuariosService,
-    public location: Location
-  ){
-
-  }
   ngOnInit(): void {
-    this.usuarioForm = this.fb.group({
-      id: ['', Validators.required],
-      fechaNacimiento :['', Validators.required],
-      nombre :['', Validators.required],
-      apellido : ['', Validators.required],
-      rol : ['', Validators.required],
-      usuario: ['', [Validators.required, Validators.maxLength(8)]],
-      clave : ['', [Validators.required,Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,8}$/)]]
-      });;
+    //this.getPresupuestosVis();
 
-     this.getAllUser();
-      
+    this.getIngresos();
+    this.getEgresos();
+
   }
  
-  getAllUser():void{
-    this.usuarioService.GetallUsuarios().subscribe(resp => {
-      this.usuar=resp;
-      },
-        error => { console.error(error) }
-      );
+  getPresupuestosVis() {//No se usa
+    this.presupuestoService.obtenerVis().subscribe(res => {
+      console.log(res);
+      return this.presupuestosVis = res;
+    })
   }
-  guardar(): void {
-    this.usuarioService.guardar(this.usuarioForm.value).subscribe(resp => {
-    this.usuarioForm.reset();
-    this.usuar = this.usuar.filter((usuario: { id: any; })=>resp.id==usuario.id);
-    this.usuar.push(resp);
-    window.location.reload();
-    },
-      error => { console.error(error) }
+
+  getIngresos(){
+    this.presupuestoVisService.obtenerVis(this.idIngresos).subscribe(
+      resp=>{
+        this.ingresos = resp;
+
+        this.ingresos.datos.push({
+          id:0,
+          concepto:'Total',
+          ppto_asignado: this.ingresos.totalPresupuesto,
+          porce_ppto_alcanzado:this.ingresos.totalPorcentajeEjecucion,
+          ppto_alcanzado:this.ingresos.totalEjecutado,
+          ppto_restante:this.ingresos.totalFaltante,
+          categoria:""
+        })
+      }
     );
   }
+
+  getEgresos(){
+    this.presupuestoVisService.obtenerVis(this.idEgresos).subscribe(
+      resp=>{
+        this.egresos = resp;
+
+        this.egresos.datos.push({
+          id:0,
+          concepto:'Total',
+          ppto_asignado: this.egresos.totalPresupuesto,
+          porce_ppto_alcanzado:this.egresos.totalPorcentajeEjecucion,
+          ppto_alcanzado:this.egresos.totalEjecutado,
+          ppto_restante:this.egresos.totalFaltante,
+          categoria:""          
+        })
+      }
+    );
+  }
+
+
+  exportarPDF(){
+    const DATA = document.getElementById('contenedorPDF');
+    const doc = new jsPDF('p','pt','a4');
+    
+    const options = {
+      background: 'white',
+      scale: 3
+    }
+    
+    html2canvas(DATA, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`Presupuesto.pdf`);
+    });
+
+
+   
+  }
+
+  exportarPDF2(){
+    
+  }
+
 }

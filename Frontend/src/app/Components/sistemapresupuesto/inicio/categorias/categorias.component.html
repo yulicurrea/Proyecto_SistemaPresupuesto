@@ -1,0 +1,51 @@
+<div class="cat mat-elevation-z8">
+  <mat-toolbar>
+    <button mat-icon-button aria-label="Volver" routerLink='/sistemapresupuesto' color="primary">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Categorías</span>
+  </mat-toolbar>
+  <hr>
+  <div class="formulario">
+    <form [formGroup]="categoriaForm" (ngSubmit)="guardar()">
+      <mat-label class="tam texto">Agregar categoría</mat-label>
+      <br>
+      <br>
+      <mat-form-field class="tam" appearance="fill">
+        <mat-label>Categoría</mat-label>
+        <input matInput formControlName="categoria" required autocomplete="off">
+        <mat-error
+          *ngIf="categoriaForm.get('categoria').invalid && (categoriaForm.get('categoria').touched || categoriaForm.get('categoria').dirty)">
+          Ingrese la categoría</mat-error>
+      </mat-form-field><br><br>
+      <button mat-stroked-button color="primary" class="btn" [disabled]="categoriaForm.invalid">Crear
+        Categoría</button>
+
+    </form>
+
+  </div>
+
+  <hr>
+  <table mat-table [dataSource]="categorias" class="demo-table">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef> CATEGORÍA </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;">
+        <a class="pointer"  (click) ="eliminar(element)" style="color:#e15639" matTooltip="Eliminar categoría">
+          <mat-icon>delete</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

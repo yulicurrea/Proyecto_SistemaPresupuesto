@@ -1,0 +1,44 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  table {
+    width: 100%;
+  }
+  .formulario{
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 100%;
+    vertical-align: center;
+  }
+  .tam{
+    width: 24%;
+    height: 50px;
+    margin-left: 0.5%;
+    margin-right:  0.5%;
+  }
+  .btn{
+    height:  50px;
+    width: 20%;
+    align-items:center;
+    margin-right:2%;
+  }
+  .texto{
+    color:grey;
+    font-size:20px;
+  }
+  .mat-column-porce_ppto_alcanzado{
+    text-align: center;
+  }
+
+  .mat-column-ppto_asignado{
+    text-align: right;
+  }
+  .mat-column-ppto_alcanzado{
+    text-align: right;
+  }
+  .mat-column-ppto_restante{
+    text-align: right;
+  }

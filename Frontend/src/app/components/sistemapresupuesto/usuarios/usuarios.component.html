@@ -1,10 +1,10 @@
-<div class="container">
+<div class="use mat-elevation-z8">
   <mat-toolbar>
     <span>Gestion de usuarios</span>
     <span class="example-spacer"></span>
     <button mat-button routerLink='/sistemapresupuesto/nuevousuario'>Agregar usuario</button>
   </mat-toolbar>
-  <table mat-table [dataSource]="usuarios" class="mat-elevation-z8 demo-table">
+  <table mat-table [dataSource]="usuarios" class="demo-table">
 
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
@@ -32,15 +32,14 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" style="text-align: right;">
-        
-        <button mat-button routerLink='/sistemapresupuesto/editusuario'>Editar usuario </button> 
-        <app-editusuario [usuar]='element'></app-editusuario>
+
+        <a class="pointer" style="color:#1f516f" (click) ="editar(element)" matTooltip="Editar usuario">
+          <mat-icon>edit</mat-icon>
+        </a>
         <a class="pointer" (click) ="eliminar(element)" style="color:#e15639" matTooltip="Eliminar usuario">
           <mat-icon>delete</mat-icon>
         </a>
-        
       </td>
-      
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

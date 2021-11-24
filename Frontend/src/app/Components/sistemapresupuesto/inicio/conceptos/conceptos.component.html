@@ -1,0 +1,66 @@
+<div class="con mat-elevation-z8">
+  <mat-toolbar>
+    <button mat-icon-button aria-label="Volver" routerLink='/sistemapresupuesto' color="primary">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Conceptos</span>
+  </mat-toolbar>
+  <hr>
+  <div class="formulario">
+    <form [formGroup]="conceptoForm" (ngSubmit)="guardar()">
+      <mat-label class="tam texto">Agregar concepto</mat-label>
+      <br>
+      <br>
+      <mat-form-field appearance="fill" class="tam">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="id_categoria" required>
+          <mat-option *ngFor="let cat of categorias" [value]="cat.id">
+            {{cat.categoria}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="conceptoForm.get('id_categoria').invalid && (conceptoForm.get('id_categoria').touched || conceptoForm.get('id_categoria').dirty)">
+          Seleccione la categoría.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="tam" appearance="fill">
+        <mat-label>Concepto</mat-label>
+        <input matInput formControlName="concepto" required autocomplete="off">
+        <mat-error
+          *ngIf="conceptoForm.get('concepto').invalid && (conceptoForm.get('concepto').touched || conceptoForm.get('concepto').dirty)">
+          Ingrese el concepto</mat-error>
+      </mat-form-field><br><br>
+      <button mat-stroked-button color="primary" class="btn" [disabled]="conceptoForm.invalid">Crear Concepto</button>
+
+    </form>
+
+  </div>
+
+  <hr>
+
+  <table mat-table [dataSource]="conceptos" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef> CATEGORIA </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+    </ng-container>
+    <ng-container matColumnDef="concepto">
+      <th mat-header-cell *matHeaderCellDef> CONCEPTO </th>
+      <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;">
+        <a class="pointer" (click) ="eliminar(element)" style="color:#e15639" matTooltip="Eliminar concepto">
+          <mat-icon>delete</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

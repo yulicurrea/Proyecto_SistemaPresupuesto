@@ -1,0 +1,31 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  table {
+    width: 100%;
+  }
+  .formulario{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    vertical-align: center;
+  }
+  .tam{
+    width: 33%;
+    height: 50px;
+    margin-left: 0.3%;
+  }
+  .btn{
+    height:  50px;
+    align-items:center
+  }
+  .texto{
+    color:grey;
+    font-size:20px;
+  }
+.cat{
+    width: 50%;
+    height:90%;
+    margin: 0 auto;
+}

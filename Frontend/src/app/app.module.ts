@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
 
 //Componentes
 import { LoginComponent } from './components/login/login.component';
@@ -22,7 +24,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    
+    HttpClientModule  ,
+    ChartsModule   
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
