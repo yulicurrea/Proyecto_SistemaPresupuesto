@@ -17,4 +17,8 @@ export class PresupuestoVisService {
     public obtenerVis(idCategoria:number):Observable<PresupuestoDTO>{
       return this.httpClient.get<PresupuestoDTO>(this.API_SERVER+"/obtenerPre/" + idCategoria);
     }
+
+    public exportaPDF():Observable<Blob>{
+      return this.httpClient.get<Blob>(this.API_SERVER+"/PDF");
+    }
 }
