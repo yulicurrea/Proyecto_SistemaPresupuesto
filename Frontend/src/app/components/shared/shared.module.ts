@@ -15,7 +15,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-
+import { ChartsModule } from 'ng2-charts';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -40,7 +42,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    ChartsModule,
+    MatGridListModule,
+    MatCardModule
   ],
   exports: [
     MatSliderModule,
@@ -60,7 +65,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    ChartsModule,
+    MatGridListModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

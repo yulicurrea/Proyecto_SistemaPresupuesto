@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>Presupuesto de ingresos por concepto</mat-card-title>
+      <mat-card-subtitle>Presupuesto Asignado vs Presupuesto Alcanzado</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+      </canvas>
+    </mat-card-content>
+</mat-card>

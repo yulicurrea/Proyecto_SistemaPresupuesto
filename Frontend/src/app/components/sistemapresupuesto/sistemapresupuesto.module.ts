@@ -11,7 +11,13 @@ import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.comp
 import { PresupuestoComponent } from './inicio/presupuesto/presupuesto.component';
 import { CategoriasComponent } from './inicio/categorias/categorias.component';
 import { ConceptosComponent } from './inicio/conceptos/conceptos.component';
-import { DashboardComponent } from './reportes/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { Grafico1Component } from './dashboard/grafico1/grafico1.component';
+import { Grafico2Component } from './dashboard/grafico2/grafico2.component';
+import { Grafico3Component } from './dashboard/grafico3/grafico3.component';
+import { Grafico4Component } from './dashboard/grafico4/grafico4.component';
+import { Grafico5Component } from './dashboard/grafico5/grafico5.component';
+import { Grafico6Component } from './dashboard/grafico6/grafico6.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,13 @@ import { DashboardComponent } from './reportes/dashboard/dashboard.component';
     PresupuestoComponent,
     CategoriasComponent,
     ConceptosComponent,
-    DashboardComponent
+    DashboardComponent,
+    Grafico1Component,
+    Grafico2Component,
+    Grafico3Component,
+    Grafico4Component,
+    Grafico5Component,
+    Grafico6Component
   ],
   imports: [
     CommonModule,
