@@ -121,8 +121,9 @@ export class ReportesComponent implements OnInit {
       const blob: Blob = new Blob([res], {type: 'application/pdf'});
       const fileName: string = 'Presupuesto.pdf';
       const objectUrl: string = URL.createObjectURL(blob);
-      const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-  
+     
+     
+      const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;  
       a.href = objectUrl;
       a.download = fileName;
       document.body.appendChild(a);
