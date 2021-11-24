@@ -115,9 +115,23 @@ export class ReportesComponent implements OnInit {
 
    
   }
-
-  exportarPDF2(){
+  exportarPDF2() {
+    this.presupuestoVisService.exportaPDF().subscribe(res => {
     
+      const blob: Blob = new Blob([res], {type: 'application/csv'});
+      const fileName: string = 'Reporte.pdf';
+      const objectUrl: string = URL.createObjectURL(blob);
+      const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+  
+      a.href = objectUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();        
+  
+      document.body.removeChild(a);
+      URL.revokeObjectURL(objectUrl);
+
+    });
   }
 
 }

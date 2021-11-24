@@ -15,7 +15,8 @@ import { CustomErrorHandler } from './_helpers/custom-error-handler';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,

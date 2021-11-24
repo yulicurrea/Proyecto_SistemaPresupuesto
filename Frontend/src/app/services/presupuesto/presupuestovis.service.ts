@@ -19,6 +19,6 @@ export class PresupuestoVisService {
     }
 
     public exportaPDF():Observable<Blob>{
-      return this.httpClient.get<Blob>(this.API_SERVER+"/PDF");
+      return this.httpClient.get(this.API_SERVER+"/PDF", { responseType: 'blob'});
     }
 }
