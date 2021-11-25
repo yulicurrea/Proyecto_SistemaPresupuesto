@@ -1,4 +1,4 @@
-import { Component , OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Presupuesto, PresupuestoVis, } from 'src/app/interfaces/Presupuesto';
@@ -24,9 +24,11 @@ export class ReportesComponent implements OnInit {
 
 
   idIngresos = 1;
-  idEgresos  = 2;
+  idEgresos = 2;
   ingresos: PresupuestoDTO = new PresupuestoDTO();
   egresos: PresupuestoDTO = new PresupuestoDTO();
+
+  loading: boolean = false;
 
   constructor(public presupuestoService: PresupuestoService,
     private presupuestoVisService: PresupuestoVisService,
@@ -42,7 +44,7 @@ export class ReportesComponent implements OnInit {
     this.getEgresos();
 
   }
- 
+
   getPresupuestosVis() {//No se usa
     this.presupuestoService.obtenerVis().subscribe(res => {
       console.log(res);
@@ -50,52 +52,52 @@ export class ReportesComponent implements OnInit {
     })
   }
 
-  getIngresos(){
+  getIngresos() {
     this.presupuestoVisService.obtenerVis(this.idIngresos).subscribe(
-      resp=>{
+      resp => {
         this.ingresos = resp;
 
         this.ingresos.datos.push({
-          id:0,
-          concepto:'Total',
+          id: 0,
+          concepto: 'Total',
           ppto_asignado: this.ingresos.totalPresupuesto,
-          porce_ppto_alcanzado:this.ingresos.totalPorcentajeEjecucion,
-          ppto_alcanzado:this.ingresos.totalEjecutado,
-          ppto_restante:this.ingresos.totalFaltante,
-          categoria:""
+          porce_ppto_alcanzado: this.ingresos.totalPorcentajeEjecucion,
+          ppto_alcanzado: this.ingresos.totalEjecutado,
+          ppto_restante: this.ingresos.totalFaltante,
+          categoria: ""
         })
       }
     );
   }
 
-  getEgresos(){
+  getEgresos() {
     this.presupuestoVisService.obtenerVis(this.idEgresos).subscribe(
-      resp=>{
+      resp => {
         this.egresos = resp;
 
         this.egresos.datos.push({
-          id:0,
-          concepto:'Total',
+          id: 0,
+          concepto: 'Total',
           ppto_asignado: this.egresos.totalPresupuesto,
-          porce_ppto_alcanzado:this.egresos.totalPorcentajeEjecucion,
-          ppto_alcanzado:this.egresos.totalEjecutado,
-          ppto_restante:this.egresos.totalFaltante,
-          categoria:""          
+          porce_ppto_alcanzado: this.egresos.totalPorcentajeEjecucion,
+          ppto_alcanzado: this.egresos.totalEjecutado,
+          ppto_restante: this.egresos.totalFaltante,
+          categoria: ""
         })
       }
     );
   }
 
 
-  exportarPDF(){
+  exportarPDF() {
     const DATA = document.getElementById('contenedorPDF');
-    const doc = new jsPDF('p','pt','a4');
-    
+    const doc = new jsPDF('p', 'pt', 'a4');
+
     const options = {
       background: 'white',
       scale: 3
     }
-    
+
     html2canvas(DATA, options).then((canvas) => {
 
       const img = canvas.toDataURL('image/PNG');
@@ -113,26 +115,34 @@ export class ReportesComponent implements OnInit {
     });
 
 
-   
+
   }
   exportarPDF2() {
+    this.loading = true;
+
     this.presupuestoVisService.exportaPDF().subscribe(res => {
-    
-      const blob: Blob = new Blob([res], {type: 'application/pdf'});
+      this.loading = false;
+
+      const blob: Blob = new Blob([res], { type: 'application/pdf' });
       const fileName: string = 'Presupuesto.pdf';
       const objectUrl: string = URL.createObjectURL(blob);
-     
-     
-      const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;  
+
+
+      const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
       a.href = objectUrl;
       a.download = fileName;
       document.body.appendChild(a);
-      a.click();        
-  
+      a.click();
+
       document.body.removeChild(a);
       URL.revokeObjectURL(objectUrl);
 
-    });
+    },
+    err=>{
+      this.loading = false;
+      throw err;
+    }
+    );
   }
 
 }
