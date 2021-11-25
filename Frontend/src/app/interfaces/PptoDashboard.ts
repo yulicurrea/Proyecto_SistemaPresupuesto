@@ -10,3 +10,9 @@ export class PptoTotalDashboard{
 	total_ppto_alcanzado: number;
 	total_ppto_restante: number;
 }
+
+export class porcentajeDashboard{
+    id: number;
+    concepto:String;
+    porce_ppto_alcanzado:number;
+}
