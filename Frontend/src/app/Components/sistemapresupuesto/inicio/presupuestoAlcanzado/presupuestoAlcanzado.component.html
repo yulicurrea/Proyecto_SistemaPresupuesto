@@ -1,0 +1,76 @@
+<div class="con mat-elevation-z8">
+  <mat-toolbar>
+    <button mat-icon-button aria-label="Volver" routerLink='/sistemapresupuesto' color="primary">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Presupuesto Alcanzado</span>
+  </mat-toolbar>
+  <div class="formulario">
+    <form [formGroup]="presupuestoAlcanzadoForm" (ngSubmit)="guardar()">
+      <mat-label class="tam texto">Insertar Datos</mat-label>
+      <br><br>
+      <mat-form-field appearance="fill" class="tam">
+        <mat-label>Id_Presupuesto</mat-label>
+        <input matInput formControlName="id_presupuesto" readonly="readonly">
+          <!--mat-option *ngFor="let pres of presupuestosVis" [value]="pres.id">
+            {{pres.id}}-->
+          {{id}}    
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Mes</mat-label>
+        <mat-select formControlName="mes" required>
+          <mat-option></mat-option>
+          <mat-option value="Enero">Enero</mat-option>
+          <mat-option value="Febrero">Febrero</mat-option>
+          <mat-option value="Marzo">Marzo</mat-option>
+          <mat-option value="Abril">Abril</mat-option>
+          <mat-option value="Mayo">Mayo</mat-option>
+          <mat-option value="Junio">Junio</mat-option>
+          <mat-option value="Julio">Julio</mat-option>
+          <mat-option value="Agosto">Agosto</mat-option>
+          <mat-option value="Septiembre">Septiembre</mat-option>
+          <mat-option value="Octubre">Octubre</mat-option>
+          <mat-option value="Noviembre">Noviembre</mat-option>
+          <mat-option value="Diciembre">Diciembre</mat-option>
+         </mat-select>
+      </mat-form-field>
+        <mat-form-field appearance="fill" class="tam">
+          <mat-label>Valor</mat-label>
+          <input matInput formControlName="ppto_alcanzado" type="number" min="0" autocomplete="off" required>
+          <span matPrefix>$&nbsp;</span>
+          <mat-error
+            *ngIf="presupuestoAlcanzadoForm.get('ppto_alcanzado').invalid && (presupuestoAlcanzadoForm.get('ppto_alcanzado').touched || presupuestoAlcanzadoForm.get('ppto_alcanzado').dirty)">
+            Ingrese el valor del presupuesto mensual.</mat-error>
+        </mat-form-field><br><br>
+       <button mat-stroked-button color="primary" class="btn" [disabled]="presupuestoAlcanzadoForm.invalid">Agregar</button>
+    
+
+      
+        
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

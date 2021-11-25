@@ -18,6 +18,7 @@ import { Grafico3Component } from './dashboard/grafico3/grafico3.component';
 import { Grafico4Component } from './dashboard/grafico4/grafico4.component';
 import { Grafico5Component } from './dashboard/grafico5/grafico5.component';
 import { Grafico6Component } from './dashboard/grafico6/grafico6.component';
+import { PresupuestoAlcanzadoComponent } from './inicio/presupuestoAlcanzado/presupuestoAlcanzado.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { Grafico6Component } from './dashboard/grafico6/grafico6.component';
     Grafico3Component,
     Grafico4Component,
     Grafico5Component,
-    Grafico6Component
+    Grafico6Component,
+    PresupuestoAlcanzadoComponent
   ],
   imports: [
     CommonModule,

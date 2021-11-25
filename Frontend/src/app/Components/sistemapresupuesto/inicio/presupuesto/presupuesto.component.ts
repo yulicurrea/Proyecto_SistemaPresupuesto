@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Concepto } from 'src/app/interfaces/Concepto';
+import { Router } from '@angular/router';
 import { Presupuesto, PresupuestoVis } from 'src/app/interfaces/Presupuesto';
 import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
 import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
@@ -28,10 +29,12 @@ export class PresupuestoComponent implements OnInit {
   conceptos: Concepto[] = [];
 
 
-
   constructor(
     public fb: FormBuilder,
-    public presupuestoService: PresupuestoService, public conceptoService: ConceptoService, private _snackBar: MatSnackBar
+    private router: Router,
+    public presupuestoService: PresupuestoService,
+    public conceptoService: ConceptoService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -79,7 +82,10 @@ export class PresupuestoComponent implements OnInit {
         }
       })
   }
-
+  agregar(presupuesto: Presupuesto) {
+    this.router.navigateByUrl('/sistemapresupuesto/presupuestoAlcanzado/' + presupuesto.id);
+  }
+ 
   menEliminarCorrecto() {
     this._snackBar.open('Presupuesto eliminado', '', {
       duration: 5000,

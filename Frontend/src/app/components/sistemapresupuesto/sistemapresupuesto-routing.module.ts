@@ -10,6 +10,7 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { SistemapresupuestoComponent } from './sistemapresupuesto.component';
 import { NuevoUsuarioComponent } from './usuarios/nuevousuario/nuevousuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { PresupuestoAlcanzadoComponent } from './inicio/presupuestoAlcanzado/presupuestoAlcanzado.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
       { path: 'presupuestos', component: PresupuestoComponent },
       { path: 'conceptos', component: ConceptosComponent },
       { path: 'categorias', component: CategoriasComponent },
-      { path: 'dashboard', component: DashboardComponent}
+      { path: 'dashboard', component: DashboardComponent},
+      { path: 'presupuestoAlcanzado', component: PresupuestoAlcanzadoComponent},
+      { path: 'presupuestoAlcanzado/:id', component: PresupuestoAlcanzadoComponent}
     ]
   }]
 
