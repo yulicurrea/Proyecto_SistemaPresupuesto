@@ -50,7 +50,7 @@ export class Grafico1Component implements OnInit {
       this.barChartLabels.push(concepto[index]);
     }
       this.barChartData.push({data: ppto_asignado,label:'Presupuesto Asignado'},{data: ppto_alcanzado,label:'Presupuesto Alcanzado'})
-    
+      
   }
 
 }
