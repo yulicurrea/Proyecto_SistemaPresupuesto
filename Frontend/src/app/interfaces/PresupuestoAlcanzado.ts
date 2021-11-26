@@ -1,5 +1,10 @@
 export interface PresupuestoAlcanzado{
     id_presupuesto:number;
     mes:String;
-    ppto_alcanzado:number;
+    valor:number;
+}
+export interface PresupuestoAlcanzadoVis{
+    id_presupuesto:number;
+    mes:String;
+    valor:number;
 }

@@ -23,7 +23,7 @@ interface Food {
 
 export class PresupuestoAlcanzadoComponent implements OnInit {
 
-  displayedColumns: string[] = ['id_presupuesto', 'mes', 'ppto_alcanzado'];
+  displayedColumns: string[] = ['id_presupuesto', 'mes', 'valor'];
   presupuestoAlcanzadoForm!: FormGroup;
   presupuestosAlcanzado: PresupuestoAlcanzado[] = [];
   presupuestosVis: PresupuestoVis[] = [];
@@ -49,7 +49,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     this.presupuestoAlcanzadoForm = this.fb.group({
       id_presupuesto: [this.id, Validators.required],
       mes: ['', Validators.required],
-      ppto_alcanzado: ['', Validators.required],
+      valor: ['', Validators.required],
     });;
     this.getpresupuestoAlcanzado()
     this.getId()
@@ -61,7 +61,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
   }
   guardar(): void {
     console.log(this.presupuestoAlcanzadoForm.value)
-    this.presupuestoService.guardar(this.presupuestoAlcanzadoForm.value).subscribe(resp => {
+    this.presupuestoAlcanzadoService.guardar(this.presupuestoAlcanzadoForm.value).subscribe(resp => {
 
       console.log(resp.id_presupuesto);
       console.log(this.presupuestoAlcanzadoForm.value.id_presupuesto);
@@ -87,7 +87,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
   }
 
   eliminar(presupuesto: any) {
-    this.presupuestoService.eliminarPresupuesto(presupuesto.id)
+    this.presupuestoAlcanzadoService.eliminar(presupuesto.id)
       .subscribe(resp => {
         if (resp.id == presupuesto.id) {
           this.getpresupuestoAlcanzado();
@@ -97,7 +97,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
   }
 
   menEliminarCorrecto() {
-    this._snackBar.open('Presupuesto eliminado', '', {
+    this._snackBar.open('Presupuesto Alcanzado eliminado', '', {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
@@ -105,7 +105,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     });
   }
   menGuardarCorrecto() {
-    this._snackBar.open('Presupuesto asignado', '', {
+    this._snackBar.open('Presupuesto Alcanzado asignado', '', {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
@@ -113,7 +113,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     });
   }
   menGuardarIncorrecto() {
-    this._snackBar.open('El presupuesto para este concepto ya ha sido asignado.', '', {
+    this._snackBar.open('El presupuesto alcanzado  ya ha sido asignado.', '', {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',

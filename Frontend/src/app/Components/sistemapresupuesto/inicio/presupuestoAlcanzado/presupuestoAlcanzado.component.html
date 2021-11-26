@@ -33,12 +33,12 @@
       </mat-form-field>
       <mat-form-field appearance="fill" class="tam">
         <mat-label>Valor</mat-label>
-        <input matInput formControlName="ppto_alcanzado" type="number" min="0" autocomplete="off" required>
+        <input matInput formControlName="valor" type="number" min="0" autocomplete="off" required>
         <span matPrefix>$&nbsp;</span>
         <mat-error
-          *ngIf="presupuestoAlcanzadoForm.get('ppto_alcanzado').invalid && (presupuestoAlcanzadoForm.get('ppto_alcanzado').touched || presupuestoAlcanzadoForm.get('ppto_alcanzado').dirty)">
+          *ngIf="presupuestoAlcanzadoForm.get('valor').invalid && (presupuestoAlcanzadoForm.get('valor').touched || presupuestoAlcanzadoForm.get('valor').dirty)">
           Ingrese el valor del presupuesto mensual.</mat-error>
-      </mat-form-field>
+      </mat-form-field> 
       <br>
       <br>
       <button mat-stroked-button color="primary" class="btn"
@@ -54,17 +54,16 @@
 
         <ng-container matColumnDef="mes">
           <th mat-header-cell *matHeaderCellDef> MES </th>
-          <td mat-cell *matCellDef="let element"> {{element.mes}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.mes}} </td> 
         </ng-container>
-
-        <ng-container matColumnDef="ppto_alcanzado">
+        <ng-container matColumnDef="valor">
           <th mat-header-cell *matHeaderCellDef> VALOR </th>
-          <td mat-cell *matCellDef="let element"> {{element.ppto_alcanzado}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
         </ng-container>
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
-            <a class="pointer" (click)="eliminar(element)" style="color:#e15639" matTooltip="Eliminar presupuesto">
+            <a class="pointer" (click)="eliminar(element)" style="color:#e15639" matTooltip="Eliminar presupuesto alcanzado">
               <mat-icon>delete</mat-icon>
             </a>
           </td>
