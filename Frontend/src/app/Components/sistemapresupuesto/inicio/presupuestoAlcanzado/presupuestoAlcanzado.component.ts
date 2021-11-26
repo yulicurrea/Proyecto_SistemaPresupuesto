@@ -76,11 +76,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     }
     );
   }
-  getPresupuesto() {
-    this.presupuestoService.obtenerVis().subscribe(res => {
-      return this.presupuestosVis = res
-    })
-  }
+ 
 
   getId() {
     return this.id
