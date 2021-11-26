@@ -4,7 +4,10 @@ export interface PresupuestoAlcanzado{
     valor:number;
 }
 export interface PresupuestoAlcanzadoVis{
-    id_presupuesto:number;
+    id:number;
+    categoria:String;
+    concepto:String;
+    anio:String;
     mes:String;
     valor:number;
 }

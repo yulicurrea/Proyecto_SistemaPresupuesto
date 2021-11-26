@@ -2,18 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Concepto } from 'src/app/interfaces/Concepto';
-import { PresupuestoAlcanzado } from 'src/app/interfaces/PresupuestoAlcanzado';
-import { Presupuesto, PresupuestoVis } from 'src/app/interfaces/Presupuesto';
-import { ConceptoService } from 'src/app/services/presupuesto/concepto.service';
-import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
-import { PresupuestoAlcanzadoService } from 'src/app/services/presupuesto/presupuestoAlcanzado.service';
+import { PresupuestoAlcanzado, PresupuestoAlcanzadoVis} from 'src/app/interfaces/PresupuestoAlcanzado';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { PresupuestoAlcanzadoService } from 'src/app/services/presupuesto/presupuestoAlcanzado.service';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
+
 
 @Component({
   selector: 'app-presupuestoAlcanzado',
@@ -23,20 +16,14 @@ interface Food {
 
 export class PresupuestoAlcanzadoComponent implements OnInit {
 
-  displayedColumns: string[] = ['id_presupuesto','categoria', 'concepto', 'anio', 'mes', 'valor','acciones'];
+  displayedColumns: string[] = ['categoria', 'concepto', 'anio', 'mes', 'valor','acciones'];
   presupuestoAlcanzadoForm!: FormGroup;
-  presupuestosAlcanzado: PresupuestoAlcanzado[] = [];
-  presupuestosVis: PresupuestoVis[] = [];
-  presupuestoAlcanzadoServicel: PresupuestoAlcanzadoService[] = [];
-  presupuesto: Presupuesto[] = [];
-  conceptos: Concepto[] = [];
+  presupuestosAlcanzadoVis: PresupuestoAlcanzadoVis[] = [];
   id: any = ''
 
 
   constructor(
     public fb: FormBuilder,
-    public presupuestoService: PresupuestoService,
-    public conceptoService: ConceptoService,
     public presupuestoAlcanzadoService: PresupuestoAlcanzadoService,
     public location: Location,
     private _snackBar: MatSnackBar,
@@ -51,31 +38,33 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
       mes: ['', Validators.required],
       valor: ['', Validators.required],
     });;
-    this.getpresupuestoAlcanzado()
     this.getId()
+    this.getpresupuestoAlcanzado(this.id)
+    
 
   }
-  getpresupuestoAlcanzado() {
-    this.presupuestoAlcanzadoService.obtenerTodas().subscribe(res => {
-      return this.presupuestosAlcanzado = res
+  getpresupuestoAlcanzado(id) {
+    this.presupuestoAlcanzadoService.obtenerLista(id).subscribe(res => {
+      return this.presupuestosAlcanzadoVis = res
     })
   }
   guardar(): void {
-    console.log(this.presupuestoAlcanzadoForm.value)
-    this.presupuestoAlcanzadoService.guardar(this.presupuestoAlcanzadoForm.value).subscribe(resp => {
+       this.presupuestoAlcanzadoService.guardar(this.presupuestoAlcanzadoForm.value).subscribe(resp => {
 
-      console.log(resp.id_presupuesto);
-      console.log(this.presupuestoAlcanzadoForm.value.id_presupuesto);
+     
       if (resp.id_presupuesto == this.presupuestoAlcanzadoForm.value.id_presupuesto) {
-        this.getpresupuestoAlcanzado();
         this.menGuardarCorrecto()
       } else {
         this.menGuardarIncorrecto()
+
       }
+      this.getpresupuestoAlcanzado(this.presupuestoAlcanzadoForm.value.id_presupuesto)
       this.presupuestoAlcanzadoForm.reset();
     }
     );
+    
   }
+
  
 
   getId() {
@@ -86,9 +75,10 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     this.presupuestoAlcanzadoService.eliminar(presupuesto.id)
       .subscribe(resp => {
         if (resp.id == presupuesto.id) {
-          this.getpresupuestoAlcanzado();
           this.menEliminarCorrecto()
-        }
+          
+            }
+        this.getpresupuestoAlcanzado(presupuesto.id)
       })
   }
 

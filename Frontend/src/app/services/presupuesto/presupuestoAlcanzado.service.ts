@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PresupuestoAlcanzado } from 'src/app/interfaces/PresupuestoAlcanzado';
+import { PresupuestoAlcanzado, PresupuestoAlcanzadoVis } from 'src/app/interfaces/PresupuestoAlcanzado';
 
 
 @Injectable({
@@ -20,5 +20,8 @@ export class PresupuestoAlcanzadoService {
     }
     public eliminar(id: number): Observable<any>{
       return this.httpClient.delete(this.API_SERVER+ "/deletePresupuesto/" + id);
+    }
+    public obtenerLista(id: number):Observable<PresupuestoAlcanzadoVis[]>{
+      return this.httpClient.get<PresupuestoAlcanzadoVis[]>(this.API_SERVER+"/obtenerLista/"+ id);
     }
 }
