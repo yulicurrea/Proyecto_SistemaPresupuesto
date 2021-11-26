@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PptoDashboard, PptoTotalDashboard } from 'src/app/interfaces/PptoDashboard';
+import { porcentajeDashboard, PptoDashboard, PptoTotalDashboard } from 'src/app/interfaces/PptoDashboard';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +17,8 @@ export class DashboardService {
     public obtenerDatosGraficoPptoTotal(id: number):Observable<PptoTotalDashboard[]>{
       return this.httpClient.get<PptoTotalDashboard[]>(this.API_SERVER+"/datosDashPptoTotal/"+id);
     }
+
+  public obtenerDatosPorcentaje(id : number):Observable<porcentajeDashboard[]>{
+    return this.httpClient.get<porcentajeDashboard[]>(this.API_SERVER+"/datosDashPorcentaje/"+id);
+  } 
 }
