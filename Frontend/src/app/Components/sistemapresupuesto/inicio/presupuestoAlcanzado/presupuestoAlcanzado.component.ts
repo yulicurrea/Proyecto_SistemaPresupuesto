@@ -23,7 +23,7 @@ interface Food {
 
 export class PresupuestoAlcanzadoComponent implements OnInit {
 
-  displayedColumns: string[] = ['id_presupuesto', 'mes', 'valor'];
+  displayedColumns: string[] = ['id_presupuesto', 'mes', 'valor','acciones'];
   presupuestoAlcanzadoForm!: FormGroup;
   presupuestosAlcanzado: PresupuestoAlcanzado[] = [];
   presupuestosVis: PresupuestoVis[] = [];
@@ -56,8 +56,9 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
 
   }
   getpresupuestoAlcanzado() {
-
-
+    this.presupuestoAlcanzadoService.obtenerTodas().subscribe(res => {
+      return this.presupuestosAlcanzado = res
+    })
   }
   guardar(): void {
     console.log(this.presupuestoAlcanzadoForm.value)
@@ -75,7 +76,6 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     }
     );
   }
-
   getPresupuesto() {
     this.presupuestoService.obtenerVis().subscribe(res => {
       return this.presupuestosVis = res
