@@ -50,7 +50,21 @@
           <th mat-header-cell *matHeaderCellDef> ID </th>
           <td mat-cell *matCellDef="let element"> {{element.id_presupuesto}} </td>
         </ng-container>
-
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef> CATEGORÍA </th>
+          <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="concepto">
+          <th mat-header-cell *matHeaderCellDef> CONCEPTO </th>
+          <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="anio">
+          <th mat-header-cell *matHeaderCellDef> AÑO </th>
+    
+          <td mat-cell *matCellDef="let element"> {{element.anio}} </td>
+        </ng-container>
         <ng-container matColumnDef="mes">
           <th mat-header-cell *matHeaderCellDef> MES </th>
           <td mat-cell *matCellDef="let element"> {{element.mes}} </td> 

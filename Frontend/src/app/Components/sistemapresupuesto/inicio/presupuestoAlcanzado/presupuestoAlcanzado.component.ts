@@ -23,7 +23,7 @@ interface Food {
 
 export class PresupuestoAlcanzadoComponent implements OnInit {
 
-  displayedColumns: string[] = ['id_presupuesto', 'mes', 'valor','acciones'];
+  displayedColumns: string[] = ['id_presupuesto','categoria', 'concepto', 'anio', 'mes', 'valor','acciones'];
   presupuestoAlcanzadoForm!: FormGroup;
   presupuestosAlcanzado: PresupuestoAlcanzado[] = [];
   presupuestosVis: PresupuestoVis[] = [];
