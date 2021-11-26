@@ -113,7 +113,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
     });
   }
   menGuardarIncorrecto() {
-    this._snackBar.open('El presupuesto alcanzado  ya ha sido asignado.', '', {
+    this._snackBar.open('El presupuesto alcanzado  ya ha sido asignado para ese mes.', '', {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
