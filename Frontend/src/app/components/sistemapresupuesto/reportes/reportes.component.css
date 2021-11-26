@@ -25,3 +25,16 @@
     color:grey;
     font-size:20px;
   }
+  .mat-column-porce_ppto_alcanzado{
+    text-align: center;
+  }
+
+  .mat-column-ppto_asignado{
+    text-align: right;
+  }
+  .mat-column-ppto_alcanzado{
+    text-align: right;
+  }
+  .mat-column-ppto_restante{
+    text-align: right;
+  }
