@@ -2,7 +2,7 @@
     flex: 1 1 auto;
   }
   table {
-    width: 100%;
+    width: 98%;
   }
   .formulario{
     width: 100%;
@@ -14,14 +14,14 @@
     vertical-align: center;
   }
   .tam{
-    width: 24%;
+    width: 31%;
     height: 50px;
     margin-left: 0.5%;
     margin-right:  0.5%;
   }
   .btn{
     height:  50px;
-    width: 20%;
+    width: 31%;
     align-items:center;
     margin-right:2%;
   }
@@ -29,16 +29,8 @@
     color:grey;
     font-size:20px;
   }
-  .mat-column-porce_ppto_alcanzado{
-    text-align: center;
-  }
-
-  .mat-column-ppto_asignado{
-    text-align: right;
-  }
-  .mat-column-ppto_alcanzado{
-    text-align: right;
-  }
-  .mat-column-ppto_restante{
-    text-align: right;
+  .preAlca{
+    width: 50%;
+    height:90%;
+    margin: 0 auto;
   }

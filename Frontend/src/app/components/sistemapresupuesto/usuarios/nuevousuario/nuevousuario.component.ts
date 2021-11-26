@@ -41,9 +41,6 @@ export class NuevoUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.cargarFormulario();
 
-
-    // this.getAllUser();
-
     if (this.editarId) {
       this.cargarUsuario();
     }
@@ -74,9 +71,7 @@ export class NuevoUsuarioComponent implements OnInit {
         this.usuario = resp;
         this.cargarFormulario();
       },
-      error => {//opcional
-        //Manejo del error
-        //Notificar("No se pudo guardar")
+      error => {
       }
     );
 

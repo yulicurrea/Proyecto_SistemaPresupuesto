@@ -1,4 +1,4 @@
-<div class="con mat-elevation-z8">
+<div class="preAlca mat-elevation-z8">
   <mat-toolbar>
     <button mat-icon-button aria-label="Volver" routerLink='/sistemapresupuesto' color="primary">
       <mat-icon>arrow_back_ios</mat-icon>
@@ -11,12 +11,9 @@
       <br><br>
       <mat-form-field appearance="fill" class="tam">
         <mat-label>Id_Presupuesto</mat-label>
-        <input matInput formControlName="id_presupuesto" readonly="readonly">
-          <!--mat-option *ngFor="let pres of presupuestosVis" [value]="pres.id">
-            {{pres.id}}-->
-          {{id}}    
+        <input matInput disabled value="id">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="tam">
         <mat-label>Mes</mat-label>
         <mat-select formControlName="mes" required>
           <mat-option></mat-option>
@@ -32,69 +29,46 @@
           <mat-option value="Octubre">Octubre</mat-option>
           <mat-option value="Noviembre">Noviembre</mat-option>
           <mat-option value="Diciembre">Diciembre</mat-option>
-         </mat-select>
+        </mat-select>
       </mat-form-field>
-        <mat-form-field appearance="fill" class="tam">
-          <mat-label>Valor</mat-label>
-          <input matInput formControlName="ppto_alcanzado" type="number" min="0" autocomplete="off" required>
-          <span matPrefix>$&nbsp;</span>
-          <mat-error
-            *ngIf="presupuestoAlcanzadoForm.get('ppto_alcanzado').invalid && (presupuestoAlcanzadoForm.get('ppto_alcanzado').touched || presupuestoAlcanzadoForm.get('ppto_alcanzado').dirty)">
-            Ingrese el valor del presupuesto mensual.</mat-error>
-        </mat-form-field><br><br>
-       <button mat-stroked-button color="primary" class="btn" [disabled]="presupuestoAlcanzadoForm.invalid">Agregar</button>
-    
+      <mat-form-field appearance="fill" class="tam">
+        <mat-label>Valor</mat-label>
+        <input matInput formControlName="ppto_alcanzado" type="number" min="0" autocomplete="off" required>
+        <span matPrefix>$&nbsp;</span>
+        <mat-error
+          *ngIf="presupuestoAlcanzadoForm.get('ppto_alcanzado').invalid && (presupuestoAlcanzadoForm.get('ppto_alcanzado').touched || presupuestoAlcanzadoForm.get('ppto_alcanzado').dirty)">
+          Ingrese el valor del presupuesto mensual.</mat-error>
+      </mat-form-field>
+      <br>
+      <br>
+      <button mat-stroked-button color="primary" class="btn"
+        [disabled]="presupuestoAlcanzadoForm.invalid">Agregar</button>
+      <br>
+      <br>
 
-             
-        <table mat-table [dataSource]="presupuestosAlcanzado" class="mat-elevation-z8 demo-table">
+      <table mat-table [dataSource]="presupuestosAlcanzado" class="demo-table">
         <ng-container matColumnDef="id_presupuesto">
-          <th mat-header-cell *matHeaderCellDef> ID  </th>
+          <th mat-header-cell *matHeaderCellDef> ID </th>
           <td mat-cell *matCellDef="let element"> {{element.id_presupuesto}} </td>
         </ng-container>
-    
+
         <ng-container matColumnDef="mes">
           <th mat-header-cell *matHeaderCellDef> MES </th>
           <td mat-cell *matCellDef="let element"> {{element.mes}} </td>
         </ng-container>
-    
+
         <ng-container matColumnDef="ppto_alcanzado">
           <th mat-header-cell *matHeaderCellDef> VALOR </th>
           <td mat-cell *matCellDef="let element"> {{element.ppto_alcanzado}} </td>
         </ng-container>
-          <ng-container matColumnDef="acciones">
+        <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
             <a class="pointer" (click)="eliminar(element)" style="color:#e15639" matTooltip="Eliminar presupuesto">
               <mat-icon>delete</mat-icon>
             </a>
-            </td>
+          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
