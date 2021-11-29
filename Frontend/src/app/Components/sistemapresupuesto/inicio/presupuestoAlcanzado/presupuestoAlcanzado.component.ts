@@ -60,6 +60,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
       }
       this.getpresupuestoAlcanzado(this.presupuestoAlcanzadoForm.value.id_presupuesto)
       this.presupuestoAlcanzadoForm.reset();
+      window.location.reload()
     }
     );
     
@@ -79,6 +80,7 @@ export class PresupuestoAlcanzadoComponent implements OnInit {
           
             }
         this.getpresupuestoAlcanzado(presupuesto.id)
+        window.location.reload()
       })
   }
 
